@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+env/
+
+data/
+results/
+*.hdf5
+*.h5
+*.npy
+*.npz
+*.tmp
+coco_meta.json
+
+.DS_Store
