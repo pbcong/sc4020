@@ -1,0 +1,20 @@
+[project]
+name = "sc4020"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "faiss-cpu>=1.9",
+    "h5py>=3.10",
+    "huggingface_hub>=0.30",
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "open_clip_torch>=2.24",
+    "pandas>=2.1",
+    "pillow>=10.0",
+    "torch>=2.2",
+    "torchvision>=0.17",
+    "tqdm>=4.66",
+]
+
+[tool.uv]
+package = false

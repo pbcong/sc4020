@@ -2,12 +2,19 @@
 
 ## Setup
 ```bash
-pip install torch torchvision faiss-cpu open_clip_torch h5py numpy pandas matplotlib tqdm pillow
+curl -LsSf https://astral.sh/uv/install.sh | sh    # if uv is not installed
+uv sync                                            # creates .venv from uv.lock
+source .venv/bin/activate                          # or prefix commands with `uv run`
 export SC4020_DATA=/path/to/data      # default: /raid/linzhuoyi_sc4020/data
 export COCO_ROOT=/path/to/coco2014    # default: ~/coco2014
 ```
 
 ## Get the data
+Download the prepared files:
+```bash
+hf download pbcong/sc4020 --repo-type dataset --local-dir $SC4020_DATA
+```
+Or rebuild them:
 ```bash
 # LAION (VIBE benchmark file, 4.5 GB)
 wget -P $SC4020_DATA/laion https://huggingface.co/datasets/vector-index-bench/vibe/resolve/main/laion-clip-512-normalized.hdf5
