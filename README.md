@@ -43,3 +43,13 @@ run_benchmark(data, lambda q: index.search(q, 100)[1],
               csv_path="results/coco_pq.csv")
 ```
 Each call writes two rows (image and text queries) to the CSV. Rules: see `RULES.md`.
+
+## PQ (Task 3)
+```bash
+python pq.py                           # sweeps M in {8,16,32,64}, nbits=8, on coco and laion
+python plot_pq.py                      # recall vs QPS / bytes and Δ recall plots in results/
+```
+`pq.py` overwrites `results/{coco,laion}_pq.csv` (use `--append` to add rows) and prints Δ recall
+and reconstruction MSE per setting. Codebooks are trained on `corpus` only, k-means seed = `common.SEED` (0),
+built with all cores, searched on one thread. Bits per vector = 8·M (64/128/256/512), for matching against LSH nbits.
+It needs ~4 GB RAM on laion; time all methods on the same machine, plugged in, since QPS depends on CPU power state.

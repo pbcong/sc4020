@@ -1,0 +1,9 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+coco,PQ,"M=8,nbits=8",-,image,0.30216,0.1019,1300.0,12.29,1.503,12.391,1
+coco,PQ,"M=8,nbits=8",-,text,0.17938,0.0484,1298.6,12.29,1.503,12.391,1
+coco,PQ,"M=16,nbits=8",-,image,0.39156,0.1709,735.1,20.29,2.481,22.835,1
+coco,PQ,"M=16,nbits=8",-,text,0.22938,0.0849,733.1,20.29,2.481,22.835,1
+coco,PQ,"M=32,nbits=8",-,image,0.50521,0.2929,335.8,36.29,4.438,45.792,1
+coco,PQ,"M=32,nbits=8",-,text,0.33555,0.1712,347.7,36.29,4.438,45.792,1
+coco,PQ,"M=64,nbits=8",-,image,0.65737,0.4868,171.7,68.29,8.351,87.687,1
+coco,PQ,"M=64,nbits=8",-,text,0.51484,0.363,173.6,68.29,8.351,87.687,1
