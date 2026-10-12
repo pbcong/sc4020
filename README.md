@@ -44,7 +44,7 @@ run_benchmark(data, lambda q: index.search(q, 100)[1],
 ```
 Each call writes two rows (image and text queries) to the CSV. Rules: see `RULES.md`.
 
-## PQ (Task 3)
+## PQ 
 ```bash
 python pq.py                           # sweeps M in {8,16,32,64}, nbits=8, on coco and laion
 python plot_pq.py                      # recall vs QPS / bytes and Δ recall plots in results/
