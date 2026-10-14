@@ -3,9 +3,11 @@ __pycache__/
 .ipynb_checkpoints/
 .venv/
 env/
-
+docs/
+/.claude/
+CLAUDE.md
 data/
-results/
+
 *.hdf5
 *.h5
 *.npy
