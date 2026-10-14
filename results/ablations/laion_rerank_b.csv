@@ -1,0 +1,7 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+laion,PQ+rerank,"M=32,pq_B/vec=32.5",R=200,image,0.49491,0.7313,29.6,2080.52,2079.376,31.086,1
+laion,PQ+rerank,"M=32,pq_B/vec=32.5",R=200,text,0.34097,0.5304,30.6,2080.52,2079.376,31.086,1
+laion,PQ+rerank,"M=32,pq_B/vec=32.5",R=500,image,0.69357,0.8599,31.3,2080.52,2079.376,31.086,1
+laion,PQ+rerank,"M=32,pq_B/vec=32.5",R=500,text,0.51252,0.6802,30.2,2080.52,2079.376,31.086,1
+laion,PQ+rerank,"M=32,pq_B/vec=32.5",R=1000,image,0.81878,0.9224,35.1,2080.52,2079.376,31.086,1
+laion,PQ+rerank,"M=32,pq_B/vec=32.5",R=1000,text,0.64575,0.7779,35.7,2080.52,2079.376,31.086,1

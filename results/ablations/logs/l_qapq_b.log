@@ -1,0 +1,9 @@
+15:37:56 qapq on laion: corpus (999448, 512), threads 8
+15:41:13 PQ[qa-text-pq]   M=16,nbits=8                       -              R@100 img 0.0171 txt 0.0662 Δ -0.0491 | qps 54.9/54.0 | B/vec 16.52 
+15:45:22 PQ[qa-text-pq]   M=32,nbits=8                       -              R@100 img 0.0405 txt 0.1685 Δ -0.1280 | qps 32.1/31.2 | B/vec 32.52 
+15:51:43 PQ[qa-text-pq]   M=64,nbits=8                       -              R@100 img 0.1238 txt 0.3917 Δ -0.2679 | qps 19.7/19.3 | B/vec 64.52 
+15:55:58 PQ[qa-text-opq]  M=16,nbits=8                       -              R@100 img 0.2404 txt 0.2389 Δ +0.0015 | qps 77.7/77.8 | B/vec 17.57 
+16:01:15 PQ[qa-text-opq]  M=32,nbits=8                       -              R@100 img 0.3900 txt 0.3967 Δ -0.0068 | qps 42.7/42.6 | B/vec 33.57 
+16:08:13 PQ[qa-text-opq]  M=64,nbits=8                       -              R@100 img 0.5538 txt 0.5792 Δ -0.0254 | qps 22.3/22.4 | B/vec 65.57 
+16:08:15 done
+EXIT 0

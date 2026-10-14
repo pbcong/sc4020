@@ -1,0 +1,8 @@
+seeds [0, 1, 2], nbits [128], faiss 1.15.1
+
+===== laion: corpus (999448, 512), learn_text (999448, 512) =====
+laion LSH-center     nbits=  128 seed=0 R@100 img 0.2524 txt 0.0063 (delta +0.2460) | R@10 img 0.1967 txt 0.0023 | qps 450/514 B/vec 16.26 build 4.3s
+laion LSH-center     nbits=  128 seed=1 R@100 img 0.2529 txt 0.0043 (delta +0.2485) | R@10 img 0.1902 txt 0.0017 | qps 566/484 B/vec 16.26 build 4.3s
+laion LSH-center     nbits=  128 seed=2 R@100 img 0.2535 txt 0.0041 (delta +0.2493) | R@10 img 0.1938 txt 0.0019 | qps 478/479 B/vec 16.26 build 4.3s
+wrote results/lsh_parts/laion_center_128/laion_lsh_center.csv
+EXIT 0

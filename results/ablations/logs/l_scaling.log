@@ -1,0 +1,27 @@
+15:37:56 scaling on laion: corpus (999448, 512), threads 16
+  exact top-100 for 1000 queries in 0.3s
+  exact top-100 for 1000 queries in 0.3s
+15:37:59 HNSW             M=32,efC=200,N=10000               efSearch=100   R@100 img 0.9836 txt 0.8833 Δ +0.1003 | qps 4446.3/4119.5 | B/vec 2319.79 
+15:38:02 HNSW             M=32,efC=200,N=10000               efSearch=256   R@100 img 0.9982 txt 0.9632 Δ +0.0350 | qps 2163.8/1928.9 | B/vec 2319.79 
+15:38:05 PQ               M=16,nbits=8,N=10000               -              R@100 img 0.5565 txt 0.4176 Δ +0.1388 | qps 3998.0/4176.6 | B/vec 68.44 
+15:38:11 PQ               M=64,nbits=8,N=10000               -              R@100 img 0.7543 txt 0.6472 Δ +0.1071 | qps 1858.5/1592.3 | B/vec 116.44 
+  exact top-100 for 1000 queries in 0.1s
+  exact top-100 for 1000 queries in 0.1s
+15:38:22 HNSW             M=32,efC=200,N=30000               efSearch=100   R@100 img 0.9773 txt 0.8630 Δ +0.1143 | qps 1969.5/2612.1 | B/vec 2320.14 
+15:38:27 HNSW             M=32,efC=200,N=30000               efSearch=256   R@100 img 0.9962 txt 0.9475 Δ +0.0486 | qps 1288.2/1055.0 | B/vec 2320.14 
+15:38:35 PQ               M=16,nbits=8,N=30000               -              R@100 img 0.4856 txt 0.3505 Δ +0.1351 | qps 1541.2/1614.6 | B/vec 33.48 
+15:38:49 PQ               M=64,nbits=8,N=30000               -              R@100 img 0.7133 txt 0.6090 Δ +0.1042 | qps 537.6/528.1 | B/vec 81.48 
+  exact top-100 for 1000 queries in 0.3s
+  exact top-100 for 1000 queries in 0.3s
+15:39:15 HNSW             M=32,efC=200,N=100000              efSearch=100   R@100 img 0.9715 txt 0.8451 Δ +0.1263 | qps 2170.1/2069.0 | B/vec 2320.21 
+15:39:21 HNSW             M=32,efC=200,N=100000              efSearch=256   R@100 img 0.9941 txt 0.9331 Δ +0.0610 | qps 1038.0/975.3 | B/vec 2320.21 
+15:39:41 PQ               M=16,nbits=8,N=100000              -              R@100 img 0.3855 txt 0.2627 Δ +0.1228 | qps 533.5/532.4 | B/vec 21.24 
+15:40:26 PQ               M=64,nbits=8,N=100000              -              R@100 img 0.6666 txt 0.5593 Δ +0.1073 | qps 159.1/157.6 | B/vec 69.24 
+  exact top-100 for 1000 queries in 0.9s
+  exact top-100 for 1000 queries in 0.9s
+15:41:53 HNSW             M=32,efC=200,N=300000              efSearch=100   R@100 img 0.9601 txt 0.7768 Δ +0.1833 | qps 1892.3/1914.2 | B/vec 2320.14 
+15:42:00 HNSW             M=32,efC=200,N=300000              efSearch=256   R@100 img 0.9902 txt 0.9166 Δ +0.0736 | qps 905.8/834.6 | B/vec 2320.14 
+15:42:42 PQ               M=16,nbits=8,N=300000              -              R@100 img 0.2913 txt 0.1826 Δ +0.1086 | qps 196.6/197.5 | B/vec 17.75 
+15:44:38 PQ               M=64,nbits=8,N=300000              -              R@100 img 0.6194 txt 0.5015 Δ +0.1179 | qps 56.7/54.3 | B/vec 65.75 
+15:44:38 done
+EXIT 0

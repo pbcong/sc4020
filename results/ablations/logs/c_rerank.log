@@ -1,0 +1,12 @@
+15:36:34 rerank on coco: corpus (122287, 512), threads 8
+15:37:08 PQ+rerank        M=16,pq_B/vec=20.3                 R=200          R@100 img 0.5790 txt 0.3572 Δ +0.2218 | qps 459.1/495.2 | B/vec 2068.29 
+15:37:23 PQ+rerank        M=16,pq_B/vec=20.3                 R=500          R@100 img 0.8126 txt 0.5756 Δ +0.2370 | qps 426.2/405.1 | B/vec 2068.29 
+15:37:43 PQ+rerank        M=16,pq_B/vec=20.3                 R=1000         R@100 img 0.9218 txt 0.7451 Δ +0.1768 | qps 326.4/322.0 | B/vec 2068.29 
+15:38:18 PQ+rerank        M=32,pq_B/vec=36.3                 R=200          R@100 img 0.7073 txt 0.4927 Δ +0.2146 | qps 260.2/321.7 | B/vec 2084.29 
+15:38:40 PQ+rerank        M=32,pq_B/vec=36.3                 R=500          R@100 img 0.9048 txt 0.7169 Δ +0.1879 | qps 284.3/296.2 | B/vec 2084.29 
+15:39:06 PQ+rerank        M=32,pq_B/vec=36.3                 R=1000         R@100 img 0.9717 txt 0.8624 Δ +0.1093 | qps 262.2/213.0 | B/vec 2084.29 
+15:39:50 PQ+rerank        M=64,pq_B/vec=68.3                 R=200          R@100 img 0.8647 txt 0.7126 Δ +0.1521 | qps 177.9/177.7 | B/vec 2116.29 
+15:40:28 PQ+rerank        M=64,pq_B/vec=68.3                 R=500          R@100 img 0.9805 txt 0.9055 Δ +0.0749 | qps 169.5/154.3 | B/vec 2116.29 
+15:41:10 PQ+rerank        M=64,pq_B/vec=68.3                 R=1000         R@100 img 0.9975 txt 0.9736 Δ +0.0239 | qps 143.7/143.9 | B/vec 2116.29 
+15:41:10 done
+EXIT 0

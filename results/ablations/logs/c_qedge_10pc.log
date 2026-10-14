@@ -1,0 +1,9 @@
+15:36:34 qedges on coco: corpus (122287, 512), threads 8
+  exact top-16 for 12228 queries in 7.3s
+15:36:54 added 207364 edges (1.7 per node, max 16) from 12228 captions, K=16, in 19.2s; mean layer-0 degree 21.6 -> 23.3
+15:37:09 HNSW+qedges      M=32,efC=200,n_text=12228,K=16,max_extra=16 efSearch=100   R@100 img 0.9862 txt 0.9240 Δ +0.0622 | qps 2513.3/2244.7 | B/vec 2320.22 ndis 1484/1701
+15:37:13 HNSW+qedges      M=32,efC=200,n_text=12228,K=16,max_extra=16 efSearch=128   R@100 img 0.9918 txt 0.9435 Δ +0.0483 | qps 2130.5/1868.1 | B/vec 2320.22 ndis 1751/2018
+15:37:20 HNSW+qedges      M=32,efC=200,n_text=12228,K=16,max_extra=16 efSearch=256   R@100 img 0.9983 txt 0.9783 Δ +0.0200 | qps 1214.5/1039.2 | B/vec 2320.22 ndis 2807/3259
+15:37:34 HNSW+qedges      M=32,efC=200,n_text=12228,K=16,max_extra=16 efSearch=512   R@100 img 0.9997 txt 0.9924 Δ +0.0072 | qps 673.9/576.4 | B/vec 2320.22 ndis 4532/5266
+15:37:34 done
+EXIT 0

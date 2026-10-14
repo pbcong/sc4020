@@ -1,0 +1,7 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+coco,LSH-center-QA,nbits=4096;seed=0,-,image,0.7715,0.7354,142.2,580.62,71.002,13.496,1
+coco,LSH-center-QA,nbits=4096;seed=0,-,text,0.54657,0.398,142.5,580.62,71.002,13.496,1
+coco,LSH-center-QA,nbits=4096;seed=1,-,image,0.76878,0.7302,140.2,580.62,71.002,12.067,1
+coco,LSH-center-QA,nbits=4096;seed=1,-,text,0.54689,0.3974,133.4,580.62,71.002,12.067,1
+coco,LSH-center-QA,nbits=4096;seed=2,-,image,0.76975,0.7356,128.2,580.62,71.002,12.718,1
+coco,LSH-center-QA,nbits=4096;seed=2,-,text,0.5449,0.4016,128.4,580.62,71.002,12.718,1

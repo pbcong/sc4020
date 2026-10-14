@@ -1,0 +1,3 @@
+exact image recall@100=1.0000 qps=73.6
+exact text  recall@100=1.0000 qps=76.4
+EXIT 0

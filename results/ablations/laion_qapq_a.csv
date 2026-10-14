@@ -1,0 +1,13 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+laion,PQ[pq],"M=16,nbits=8",-,image,0.19526,0.0872,55.2,16.52,16.516,35.554,1
+laion,PQ[pq],"M=16,nbits=8",-,text,0.11401,0.0429,54.1,16.52,16.516,35.554,1
+laion,PQ[pq],"M=32,nbits=8",-,image,0.34801,0.2139,32.2,32.52,32.507,56.272,1
+laion,PQ[pq],"M=32,nbits=8",-,text,0.23219,0.1307,31.4,32.52,32.507,56.272,1
+laion,PQ[pq],"M=64,nbits=8",-,image,0.56079,0.4389,19.7,64.52,64.489,67.352,1
+laion,PQ[pq],"M=64,nbits=8",-,text,0.43715,0.3307,19.2,64.52,64.489,67.352,1
+laion,PQ[opq],"M=16,nbits=8",-,image,0.38103,0.2266,78.2,17.57,17.564,172.328,1
+laion,PQ[opq],"M=16,nbits=8",-,text,0.27217,0.1622,78.2,17.57,17.564,172.328,1
+laion,PQ[opq],"M=32,nbits=8",-,image,0.51277,0.3721,42.8,33.57,33.555,175.715,1
+laion,PQ[opq],"M=32,nbits=8",-,text,0.39395,0.2745,42.8,33.57,33.555,175.715,1
+laion,PQ[opq],"M=64,nbits=8",-,image,0.66155,0.5369,22.4,65.57,65.538,150.0,1
+laion,PQ[opq],"M=64,nbits=8",-,text,0.53734,0.4303,22.5,65.57,65.538,150.0,1

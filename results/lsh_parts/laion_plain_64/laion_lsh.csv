@@ -1,0 +1,7 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+laion,LSH,nbits=64;seed=0,-,image,0.07342,0.0504,763.0,8.13,8.127,1.434,1
+laion,LSH,nbits=64;seed=0,-,text,0.00218,0.0003,764.7,8.13,8.127,1.434,1
+laion,LSH,nbits=64;seed=1,-,image,0.07701,0.0547,828.4,8.13,8.127,1.438,1
+laion,LSH,nbits=64;seed=1,-,text,0.00255,0.0005,925.7,8.13,8.127,1.438,1
+laion,LSH,nbits=64;seed=2,-,image,0.07351,0.0521,944.6,8.13,8.127,1.387,1
+laion,LSH,nbits=64;seed=2,-,text,0.00189,0.0005,765.0,8.13,8.127,1.387,1

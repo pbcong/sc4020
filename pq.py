@@ -40,11 +40,11 @@ def build_pq(corpus, M, nbits, threads):
     return index, time.time() - t0, train_s
 
 
-def sweep(name, Ms, nbits, threads, runs, append):
+def sweep(name, Ms, nbits, threads, runs, append, out=None):
     data = load_dataset(name)
     n, d = data.corpus.shape
     print(f"\n===== {name}: corpus {n} x {d}, k-means seed {SEED}, build threads {threads} =====")
-    csv_path = f"results/{name}_pq.csv"
+    csv_path = out or f"results/{name}_pq.csv"
     if not append and os.path.exists(csv_path):
         os.remove(csv_path)
 
@@ -55,7 +55,8 @@ def sweep(name, Ms, nbits, threads, runs, append):
         index_bytes = faiss_index_bytes(index)
         rows = run_benchmark(data, lambda q: index.search(q, 100)[1], method="PQ",
                              build_params=f"M={M},nbits={nbits}", search_params="-",
-                             build_s=build_s, index_bytes=index_bytes, csv_path=csv_path, runs=runs)
+                             build_s=build_s, index_bytes=index_bytes, csv_path=csv_path, runs=runs,
+                             perquery_path=f"results/perquery/{name}_pq_M{M}.npz")
         mse = reconstruction_mse(sample, index.sa_decode(index.sa_encode(sample)))
         r = {row["query_type"]: row for row in rows}
         print(f"M={M:3d} ({M * nbits:4d} bits) "
@@ -77,9 +78,10 @@ def main():
     parser.add_argument("--build-threads", type=int, default=os.cpu_count())
     parser.add_argument("--runs", type=int, default=5)
     parser.add_argument("--append", action="store_true", help="append to an existing results CSV")
+    parser.add_argument("--out", help="CSV path (default results/<dataset>_pq.csv); for one dataset")
     args = parser.parse_args()
     for name in args.datasets:
-        sweep(name, args.M, args.nbits, args.build_threads, args.runs, args.append)
+        sweep(name, args.M, args.nbits, args.build_threads, args.runs, args.append, args.out)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,21 @@
+15:40:13 hnsw_params on coco: corpus (122287, 512), threads 32
+15:40:35 HNSW             M=32,efC=200                       efSearch=100   R@100 img 0.9856 txt 0.8843 Δ +0.1013 | qps 2832.7/2619.4 | B/vec 2320.22 
+15:40:39 HNSW             M=32,efC=200                       efSearch=256   R@100 img 0.9982 txt 0.9647 Δ +0.0335 | qps 1397.5/1264.8 | B/vec 2320.22 
+15:40:48 HNSW             M=32,efC=200                       efSearch=512   R@100 img 0.9996 txt 0.9869 Δ +0.0127 | qps 730.6/705.1 | B/vec 2320.22 
+15:41:09 HNSW             M=32,efC=200                       efSearch=100   R@100 img 0.9856 txt 0.8843 Δ +0.1013 | qps 2841.1/2489.1 | B/vec 2320.22 
+15:41:14 HNSW             M=32,efC=200                       efSearch=256   R@100 img 0.9982 txt 0.9647 Δ +0.0335 | qps 1418.2/1282.9 | B/vec 2320.22 
+15:41:22 HNSW             M=32,efC=200                       efSearch=512   R@100 img 0.9996 txt 0.9869 Δ +0.0127 | qps 798.4/708.0 | B/vec 2320.22 
+15:41:43 HNSW             M=32,efC=200                       efSearch=100   R@100 img 0.9856 txt 0.8843 Δ +0.1013 | qps 2755.9/2553.2 | B/vec 2320.22 
+15:41:48 HNSW             M=32,efC=200                       efSearch=256   R@100 img 0.9982 txt 0.9647 Δ +0.0335 | qps 1401.3/1216.8 | B/vec 2320.22 
+15:41:57 HNSW             M=32,efC=200                       efSearch=512   R@100 img 0.9996 txt 0.9869 Δ +0.0127 | qps 750.6/670.8 | B/vec 2320.22 
+15:42:07 HNSW             M=32,efC=40                        efSearch=100   R@100 img 0.9868 txt 0.9195 Δ +0.0673 | qps 2615.4/2212.8 | B/vec 2320.22 
+15:42:12 HNSW             M=32,efC=40                        efSearch=256   R@100 img 0.9973 txt 0.9724 Δ +0.0248 | qps 1359.2/1148.3 | B/vec 2320.22 
+15:42:21 HNSW             M=32,efC=40                        efSearch=512   R@100 img 0.9992 txt 0.9890 Δ +0.0103 | qps 757.6/632.5 | B/vec 2320.22 
+15:42:30 HNSW             M=32,efC=40                        efSearch=100   R@100 img 0.9868 txt 0.9195 Δ +0.0673 | qps 2714.0/2254.0 | B/vec 2320.22 
+15:42:35 HNSW             M=32,efC=40                        efSearch=256   R@100 img 0.9973 txt 0.9724 Δ +0.0248 | qps 1376.3/1163.9 | B/vec 2320.22 
+15:42:44 HNSW             M=32,efC=40                        efSearch=512   R@100 img 0.9992 txt 0.9890 Δ +0.0103 | qps 788.7/667.4 | B/vec 2320.22 
+15:42:53 HNSW             M=32,efC=40                        efSearch=100   R@100 img 0.9868 txt 0.9195 Δ +0.0673 | qps 2701.6/2245.1 | B/vec 2320.22 
+15:42:58 HNSW             M=32,efC=40                        efSearch=256   R@100 img 0.9973 txt 0.9724 Δ +0.0248 | qps 1372.7/1156.7 | B/vec 2320.22 
+15:43:07 HNSW             M=32,efC=40                        efSearch=512   R@100 img 0.9992 txt 0.9890 Δ +0.0103 | qps 789.9/673.4 | B/vec 2320.22 
+15:43:07 done
+EXIT 0

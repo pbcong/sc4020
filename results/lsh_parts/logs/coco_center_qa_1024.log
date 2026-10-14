@@ -1,0 +1,8 @@
+seeds [0, 1, 2], nbits [1024], faiss 1.15.1
+
+===== coco: corpus (122287, 512), learn_text (122287, 512) =====
+coco LSH-center-QA  nbits= 1024 seed=0 R@100 img 0.6927 txt 0.4222 (delta +0.2704) | R@10 img 0.6249 txt 0.2799 | qps 536/502 B/vec 145.17 build 2.6s
+coco LSH-center-QA  nbits= 1024 seed=1 R@100 img 0.6916 txt 0.4195 (delta +0.2721) | R@10 img 0.6223 txt 0.2748 | qps 513/508 B/vec 145.17 build 2.4s
+coco LSH-center-QA  nbits= 1024 seed=2 R@100 img 0.6913 txt 0.4182 (delta +0.2731) | R@10 img 0.6256 txt 0.2711 | qps 550/549 B/vec 145.17 build 2.3s
+wrote results/lsh_parts/coco_center_qa_1024/coco_lsh_center_qa.csv
+EXIT 0

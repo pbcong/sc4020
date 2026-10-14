@@ -1,0 +1,13 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+coco,HNSW+center,"M=32,efC=200",efSearch=100,image,0.98723,0.999,2413.7,2320.22,283.733,31.751,1
+coco,HNSW+center,"M=32,efC=200",efSearch=100,text,0.93063,0.9771,2190.7,2320.22,283.733,31.751,1
+coco,HNSW+center,"M=32,efC=200",efSearch=128,image,0.99227,0.9993,2056.6,2320.22,283.733,31.751,1
+coco,HNSW+center,"M=32,efC=200",efSearch=128,text,0.95086,0.9832,1847.0,2320.22,283.733,31.751,1
+coco,HNSW+center,"M=32,efC=200",efSearch=256,image,0.99836,0.9997,1222.6,2320.22,283.733,31.751,1
+coco,HNSW+center,"M=32,efC=200",efSearch=256,text,0.98227,0.9939,1055.2,2320.22,283.733,31.751,1
+coco,HNSW+center,"M=32,efC=200",efSearch=512,image,0.99974,1.0,575.8,2320.22,283.733,31.751,1
+coco,HNSW+center,"M=32,efC=200",efSearch=512,text,0.99353,0.9967,504.4,2320.22,283.733,31.751,1
+coco,PQ+center,"M=16,nbits=8",-,image,0.46696,0.2456,611.6,20.29,2.481,9.95,1
+coco,PQ+center,"M=16,nbits=8",-,text,0.26867,0.1025,610.2,20.29,2.481,9.95,1
+coco,PQ+center,"M=64,nbits=8",-,image,0.73824,0.6001,181.9,68.29,8.351,6.18,1
+coco,PQ+center,"M=64,nbits=8",-,text,0.57293,0.4165,143.5,68.29,8.351,6.18,1

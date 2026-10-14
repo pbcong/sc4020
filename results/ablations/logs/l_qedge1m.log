@@ -1,0 +1,9 @@
+16:08:56 qedges on laion: corpus (999448, 512), threads 64
+  exact top-16 for 999448 queries in 6149.1s
+17:51:54 added 10964709 edges (11.0 per node, max 16) from 999448 captions, K=16, in 6175.7s; mean layer-0 degree 23.1 -> 34.1
+17:52:02 HNSW+qedges      M=32,efC=200,n_text=999448,K=16,max_extra=16 efSearch=100   R@100 img 0.9498 txt 0.8182 Δ +0.1316 | qps 1570.5/1558.2 | B/vec 2320.13 ndis 2457/2463
+17:52:09 HNSW+qedges      M=32,efC=200,n_text=999448,K=16,max_extra=16 efSearch=128   R@100 img 0.9639 txt 0.8484 Δ +0.1155 | qps 1292.9/1272.5 | B/vec 2320.13 ndis 2965/3001
+17:52:21 HNSW+qedges      M=32,efC=200,n_text=999448,K=16,max_extra=16 efSearch=256   R@100 img 0.9840 txt 0.9114 Δ +0.0726 | qps 722.4/700.4 | B/vec 2320.13 ndis 5053/5284
+17:52:42 HNSW+qedges      M=32,efC=200,n_text=999448,K=16,max_extra=16 efSearch=512   R@100 img 0.9909 txt 0.9595 Δ +0.0315 | qps 391.1/372.2 | B/vec 2320.13 ndis 8677/9485
+17:52:42 done
+EXIT 0

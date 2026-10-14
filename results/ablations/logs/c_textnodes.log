@@ -1,0 +1,7 @@
+15:36:34 textnodes on coco: corpus (122287, 512), threads 16
+15:37:18 HNSW+textnodes   M=32,efC=200,text_nodes=12228      efSearch=100   R@100 img 0.9852 txt 0.0782 Δ +0.9071 | qps 2136.7/3718.0 | B/vec 2552.22 ndis 1424/1102
+15:37:21 HNSW+textnodes   M=32,efC=200,text_nodes=12228      efSearch=128   R@100 img 0.9912 txt 0.0798 Δ +0.9114 | qps 1863.5/3276.1 | B/vec 2552.22 ndis 1681/1310
+15:37:28 HNSW+textnodes   M=32,efC=200,text_nodes=12228      efSearch=256   R@100 img 0.9982 txt 0.0824 Δ +0.9159 | qps 998.9/1769.1 | B/vec 2552.22 ndis 2692/2155
+15:37:38 HNSW+textnodes   M=32,efC=200,text_nodes=12228      efSearch=512   R@100 img 0.9995 txt 0.0831 Δ +0.9164 | qps 630.2/1071.2 | B/vec 2552.22 ndis 4348/3518
+15:37:38 done
+EXIT 0

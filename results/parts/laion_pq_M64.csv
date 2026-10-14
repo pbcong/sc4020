@@ -1,0 +1,3 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+laion,PQ,"M=64,nbits=8",-,image,0.56016,0.4339,22.2,64.52,64.489,12.496,1
+laion,PQ,"M=64,nbits=8",-,text,0.43801,0.33,22.3,64.52,64.489,12.496,1

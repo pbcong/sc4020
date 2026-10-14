@@ -1,0 +1,5 @@
+
+===== laion: corpus 999448 x 512, k-means seed 0, build threads 6 =====
+M=  8 (  64 bits) R@100 img 0.1115 txt 0.0587 d=+0.0528 | R@10 img 0.0334 txt 0.0161 d=+0.0173 | qps 143.3/143.2 B/vec 8.52 build 16.0s (train 7.2s) mse 0.3633
+wrote results/parts/laion_pq_M8.csv
+EXIT 0

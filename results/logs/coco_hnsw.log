@@ -1,0 +1,12 @@
+===== coco: corpus (122287, 512), M=32, efC=200, build threads 16 =====
+build 26.1s, nodes per layer [122287, 3908, 118, 4, 1]
+efSearch=  100 R@100 img 0.9856 txt 0.8843 | R@10 img 0.9984 txt 0.9492 | qps 2700.4/2424.9 | ndis 1424/1578
+efSearch=  128 R@100 img 0.9915 txt 0.9122 | R@10 img 0.9991 txt 0.9613 | qps 2235.1/2033.5 | ndis 1681/1874
+efSearch=  192 R@100 img 0.9965 txt 0.9480 | R@10 img 0.9995 txt 0.9786 | qps 1660.2/1469.7 | ndis 2214/2499
+efSearch=  256 R@100 img 0.9982 txt 0.9647 | R@10 img 1.0000 txt 0.9855 | qps 1333.0/1203.6 | ndis 2697/3056
+efSearch=  384 R@100 img 0.9993 txt 0.9796 | R@10 img 1.0000 txt 0.9906 | qps 961.7/867.6 | ndis 3565/4063
+efSearch=  512 R@100 img 0.9996 txt 0.9869 | R@10 img 1.0000 txt 0.9933 | qps 759.6/683.2 | ndis 4356/4968
+efSearch=  768 R@100 img 0.9999 txt 0.9929 | R@10 img 1.0000 txt 0.9960 | qps 535.0/482.1 | ndis 5787/6616
+efSearch= 1024 R@100 img 0.9999 txt 0.9955 | R@10 img 1.0000 txt 0.9977 | qps 409.6/372.3 | ndis 7097/8123
+wrote results/coco_hnsw.csv, results/coco_hnsw_extra.csv
+EXIT 0

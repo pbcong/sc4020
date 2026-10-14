@@ -1,0 +1,12 @@
+15:36:34 hnsw_params on coco: corpus (122287, 512), threads 16
+15:37:01 HNSW             M=8,efC=200                        efSearch=100   R@100 img 0.9469 txt 0.7918 Δ +0.1551 | qps 3913.3/3518.1 | B/vec 2128.61 
+15:37:04 HNSW             M=8,efC=200                        efSearch=256   R@100 img 0.9885 txt 0.9159 Δ +0.0726 | qps 1897.1/1703.8 | B/vec 2128.61 
+15:37:11 HNSW             M=8,efC=200                        efSearch=512   R@100 img 0.9963 txt 0.9593 Δ +0.0369 | qps 1042.0/928.2 | B/vec 2128.61 
+15:37:51 HNSW             M=16,efC=200                       efSearch=100   R@100 img 0.9782 txt 0.8630 Δ +0.1152 | qps 2861.3/2616.6 | B/vec 2192.35 
+15:37:56 HNSW             M=16,efC=200                       efSearch=256   R@100 img 0.9969 txt 0.9550 Δ +0.0419 | qps 1432.6/1245.4 | B/vec 2192.35 
+15:38:04 HNSW             M=16,efC=200                       efSearch=512   R@100 img 0.9993 txt 0.9821 Δ +0.0172 | qps 763.3/674.3 | B/vec 2192.35 
+15:38:44 HNSW             M=64,efC=200                       efSearch=100   R@100 img 0.9868 txt 0.8884 Δ +0.0984 | qps 2119.3/2247.0 | B/vec 2576.11 
+15:38:49 HNSW             M=64,efC=200                       efSearch=256   R@100 img 0.9985 txt 0.9657 Δ +0.0328 | qps 1246.8/1134.6 | B/vec 2576.11 
+15:38:58 HNSW             M=64,efC=200                       efSearch=512   R@100 img 0.9996 txt 0.9872 Δ +0.0124 | qps 710.2/593.7 | B/vec 2576.11 
+15:38:58 done
+EXIT 0

@@ -1,0 +1,9 @@
+15:37:55 rerank on laion: corpus (999448, 512), threads 8
+15:40:44 PQ+rerank        M=16,pq_B/vec=16.5                 R=200          R@100 img 0.3005 txt 0.1770 Δ +0.1235 | qps 53.4/54.7 | B/vec 2064.52 
+15:42:41 PQ+rerank        M=16,pq_B/vec=16.5                 R=500          R@100 img 0.4742 txt 0.2968 Δ +0.1774 | qps 50.8/55.0 | B/vec 2064.52 
+15:44:36 PQ+rerank        M=16,pq_B/vec=16.5                 R=1000         R@100 img 0.6168 txt 0.4129 Δ +0.2039 | qps 53.7/52.3 | B/vec 2064.52 
+15:50:33 PQ+rerank        M=64,pq_B/vec=64.5                 R=200          R@100 img 0.7514 txt 0.6053 Δ +0.1461 | qps 19.5/19.6 | B/vec 2112.52 
+15:55:51 PQ+rerank        M=64,pq_B/vec=64.5                 R=500          R@100 img 0.9130 txt 0.7994 Δ +0.1136 | qps 18.5/21.9 | B/vec 2112.52 
+16:00:39 PQ+rerank        M=64,pq_B/vec=64.5                 R=1000         R@100 img 0.9678 txt 0.8945 Δ +0.0733 | qps 20.6/21.5 | B/vec 2112.52 
+16:00:39 done
+EXIT 0

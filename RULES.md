@@ -19,7 +19,8 @@ Similarity = inner product (= cosine, vectors are unit norm).
 2. **One index, both query types.** Build once, then search image queries and text queries on
    the same index with the same settings. Never rebuild in between. `run_benchmark` does this.
 3. **Search returns top-100 ids.** Main metric `recall@100`; also report `recall@10`.
-4. **One thread for timing.** `run_benchmark` sets it and uses the fastest of 5 runs.
+4. **VIBE timing.** `run_benchmark` sends queries one at a time, on one thread pinned to one CPU core,
+   and keeps the fastest of 5 runs. Run all timed experiments on the same machine.
 5. **Memory = serialized index size** (`faiss_index_bytes`), reported as bytes per vector.
 6. **Build time** includes training (k-means) + adding vectors.
 7. **Fix random seeds** (LSH projections, k-means) and state them.

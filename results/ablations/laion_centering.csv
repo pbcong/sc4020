@@ -1,0 +1,13 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+laion,HNSW+center,"M=32,efC=200",efSearch=100,image,0.96354,0.9897,1610.6,2320.13,2318.848,266.667,1
+laion,HNSW+center,"M=32,efC=200",efSearch=100,text,0.86789,0.9392,1507.3,2320.13,2318.848,266.667,1
+laion,HNSW+center,"M=32,efC=200",efSearch=128,image,0.97467,0.9934,1324.8,2320.13,2318.848,266.667,1
+laion,HNSW+center,"M=32,efC=200",efSearch=128,text,0.89598,0.9535,1220.2,2320.13,2318.848,266.667,1
+laion,HNSW+center,"M=32,efC=200",efSearch=256,image,0.99054,0.9969,717.3,2320.13,2318.848,266.667,1
+laion,HNSW+center,"M=32,efC=200",efSearch=256,text,0.95091,0.9788,676.4,2320.13,2318.848,266.667,1
+laion,HNSW+center,"M=32,efC=200",efSearch=512,image,0.99592,0.998,425.7,2320.13,2318.848,266.667,1
+laion,HNSW+center,"M=32,efC=200",efSearch=512,text,0.97684,0.9895,389.7,2320.13,2318.848,266.667,1
+laion,PQ+center,"M=16,nbits=8",-,image,0.3022,0.1758,59.0,16.52,16.516,16.55,1
+laion,PQ+center,"M=16,nbits=8",-,text,0.1515,0.0649,57.6,16.52,16.516,16.55,1
+laion,PQ+center,"M=64,nbits=8",-,image,0.67785,0.5693,19.7,64.52,64.489,11.732,1
+laion,PQ+center,"M=64,nbits=8",-,text,0.51414,0.3988,19.8,64.52,64.489,11.732,1

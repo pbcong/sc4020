@@ -1,0 +1,12 @@
+===== laion: corpus (999448, 512), M=32, efC=200, build threads 32 =====
+build 226.4s, nodes per layer [999448, 31232, 977, 27, 1]
+efSearch=  100 R@100 img 0.9388 txt 0.7487 | R@10 img 0.9634 txt 0.8287 | qps 1869.9/1868.3 | ndis 1982/1956
+efSearch=  128 R@100 img 0.9519 txt 0.7842 | R@10 img 0.9689 txt 0.8510 | qps 1552.8/1540.1 | ndis 2378/2369
+efSearch=  192 R@100 img 0.9669 txt 0.8287 | R@10 img 0.9762 txt 0.8784 | qps 1120.2/1110.2 | ndis 3231/3246
+efSearch=  256 R@100 img 0.9741 txt 0.8544 | R@10 img 0.9810 txt 0.8956 | qps 886.6/871.1 | ndis 4025/4086
+efSearch=  384 R@100 img 0.9797 txt 0.8932 | R@10 img 0.9833 txt 0.9263 | qps 626.3/603.1 | ndis 5508/5732
+efSearch=  512 R@100 img 0.9844 txt 0.9285 | R@10 img 0.9872 txt 0.9557 | qps 488.4/460.0 | ndis 6903/7388
+efSearch=  768 R@100 img 0.9866 txt 0.9465 | R@10 img 0.9886 txt 0.9656 | qps 341.6/320.4 | ndis 9473/10318
+efSearch= 1024 R@100 img 0.9876 txt 0.9561 | R@10 img 0.9893 txt 0.9709 | qps 263.5/243.7 | ndis 11879/13082
+wrote results/laion_hnsw.csv, results/laion_hnsw_extra.csv
+EXIT 0

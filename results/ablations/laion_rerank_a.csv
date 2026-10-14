@@ -1,0 +1,13 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+laion,PQ+rerank,"M=16,pq_B/vec=16.5",R=200,image,0.30052,0.4447,53.4,2064.52,2063.385,25.863,1
+laion,PQ+rerank,"M=16,pq_B/vec=16.5",R=200,text,0.17703,0.2578,54.7,2064.52,2063.385,25.863,1
+laion,PQ+rerank,"M=16,pq_B/vec=16.5",R=500,image,0.47418,0.6123,50.8,2064.52,2063.385,25.863,1
+laion,PQ+rerank,"M=16,pq_B/vec=16.5",R=500,text,0.29678,0.3884,55.0,2064.52,2063.385,25.863,1
+laion,PQ+rerank,"M=16,pq_B/vec=16.5",R=1000,image,0.61678,0.7347,53.7,2064.52,2063.385,25.863,1
+laion,PQ+rerank,"M=16,pq_B/vec=16.5",R=1000,text,0.41286,0.5044,52.3,2064.52,2063.385,25.863,1
+laion,PQ+rerank,"M=64,pq_B/vec=64.5",R=200,image,0.75136,0.9524,19.5,2112.52,2111.359,17.24,1
+laion,PQ+rerank,"M=64,pq_B/vec=64.5",R=200,text,0.6053,0.8595,19.6,2112.52,2111.359,17.24,1
+laion,PQ+rerank,"M=64,pq_B/vec=64.5",R=500,image,0.91295,0.9865,18.5,2112.52,2111.359,17.24,1
+laion,PQ+rerank,"M=64,pq_B/vec=64.5",R=500,text,0.79939,0.9384,21.9,2112.52,2111.359,17.24,1
+laion,PQ+rerank,"M=64,pq_B/vec=64.5",R=1000,image,0.96778,0.9958,20.6,2112.52,2111.359,17.24,1
+laion,PQ+rerank,"M=64,pq_B/vec=64.5",R=1000,text,0.89449,0.9692,21.5,2112.52,2111.359,17.24,1

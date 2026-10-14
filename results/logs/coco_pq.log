@@ -1,0 +1,8 @@
+
+===== coco: corpus 122287 x 512, k-means seed 0, build threads 8 =====
+M=  8 (  64 bits) R@100 img 0.3025 txt 0.1793 d=+0.1232 | R@10 img 0.1017 txt 0.0492 d=+0.0525 | qps 1057.4/1047.1 B/vec 12.29 build 6.2s (train 5.1s) mse 0.2688
+M= 16 ( 128 bits) R@100 img 0.3918 txt 0.2292 d=+0.1627 | R@10 img 0.1722 txt 0.0846 d=+0.0876 | qps 596.7/607.9 B/vec 20.29 build 8.2s (train 6.6s) mse 0.2419
+M= 32 ( 256 bits) R@100 img 0.5047 txt 0.3358 d=+0.1689 | R@10 img 0.2939 txt 0.1704 d=+0.1235 | qps 338.4/339.0 B/vec 36.29 build 5.2s (train 3.0s) mse 0.1963
+M= 64 ( 512 bits) R@100 img 0.6570 txt 0.5148 d=+0.1423 | R@10 img 0.4841 txt 0.3644 d=+0.1197 | qps 181.2/181.5 B/vec 68.29 build 4.7s (train 4.3s) mse 0.1220
+wrote results/coco_pq.csv
+EXIT 0

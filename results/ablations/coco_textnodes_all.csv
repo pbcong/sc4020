@@ -1,0 +1,9 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+coco,HNSW+textnodes,"M=32,efC=200,text_nodes=12228",efSearch=100,image,0.98521,0.9978,2136.7,2552.22,312.103,29.861,1
+coco,HNSW+textnodes,"M=32,efC=200,text_nodes=12228",efSearch=100,text,0.07816,0.09,3718.0,2552.22,312.103,29.861,1
+coco,HNSW+textnodes,"M=32,efC=200,text_nodes=12228",efSearch=128,image,0.99118,0.9985,1863.5,2552.22,312.103,29.861,1
+coco,HNSW+textnodes,"M=32,efC=200,text_nodes=12228",efSearch=128,text,0.0798,0.0905,3276.1,2552.22,312.103,29.861,1
+coco,HNSW+textnodes,"M=32,efC=200,text_nodes=12228",efSearch=256,image,0.99825,0.9998,998.9,2552.22,312.103,29.861,1
+coco,HNSW+textnodes,"M=32,efC=200,text_nodes=12228",efSearch=256,text,0.08239,0.0921,1769.1,2552.22,312.103,29.861,1
+coco,HNSW+textnodes,"M=32,efC=200,text_nodes=12228",efSearch=512,image,0.99951,1.0,630.2,2552.22,312.103,29.861,1
+coco,HNSW+textnodes,"M=32,efC=200,text_nodes=12228",efSearch=512,text,0.08309,0.0926,1071.2,2552.22,312.103,29.861,1

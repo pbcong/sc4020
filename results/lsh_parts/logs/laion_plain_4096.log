@@ -1,0 +1,8 @@
+seeds [0, 1, 2], nbits [4096], faiss 1.15.1
+
+===== laion: corpus (999448, 512), learn_text (999448, 512) =====
+laion LSH            nbits= 4096 seed=0 R@100 img 0.8050 txt 0.5143 (delta +0.2907) | R@10 img 0.7605 txt 0.4389 | qps 16/17 B/vec 520.39 build 74.6s
+laion LSH            nbits= 4096 seed=1 R@100 img 0.8048 txt 0.5158 (delta +0.2890) | R@10 img 0.7568 txt 0.4464 | qps 18/18 B/vec 520.39 build 68.8s
+laion LSH            nbits= 4096 seed=2 R@100 img 0.8067 txt 0.5194 (delta +0.2873) | R@10 img 0.7631 txt 0.4507 | qps 18/18 B/vec 520.39 build 61.7s
+wrote results/lsh_parts/laion_plain_4096/laion_lsh.csv
+EXIT 0

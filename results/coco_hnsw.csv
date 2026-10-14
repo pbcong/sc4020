@@ -1,0 +1,17 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+coco,HNSW,"M=32,efC=200",efSearch=100,image,0.9856,0.9984,2700.4,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=100,text,0.88433,0.9492,2424.9,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=128,image,0.99152,0.9991,2235.1,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=128,text,0.91217,0.9613,2033.5,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=192,image,0.99648,0.9995,1660.2,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=192,text,0.94797,0.9786,1469.7,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=256,image,0.99823,1.0,1333.0,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=256,text,0.96472,0.9855,1203.6,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=384,image,0.99926,1.0,961.7,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=384,text,0.97962,0.9906,867.6,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=512,image,0.9996,1.0,759.6,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=512,text,0.98689,0.9933,683.2,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=768,image,0.99986,1.0,535.0,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=768,text,0.99294,0.996,482.1,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=1024,image,0.9999,1.0,409.6,2320.22,283.733,26.066,1
+coco,HNSW,"M=32,efC=200",efSearch=1024,text,0.99551,0.9977,372.3,2320.22,283.733,26.066,1
