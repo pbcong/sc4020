@@ -1,0 +1,2 @@
+# The repo-root .gitignore excludes every results/ folder; keep this one, it holds the deliverables.
+!results/

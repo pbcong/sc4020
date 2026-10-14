@@ -1,0 +1,6 @@
+# Python 3.11 - versions used for the reported results
+faiss-cpu==1.15.1
+numpy==2.4.6
+pandas==3.0.6
+matplotlib==3.11.2
+h5py==3.16.0
