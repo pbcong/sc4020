@@ -1,0 +1,5 @@
+dataset,method,build_params,search_params,query_type,recall@100,recall@10,qps,bytes_per_vector,index_mb,build_s,threads
+coco,Exact,-,-,image,1.0,1.0,2003.7,2048.0,250.444,0.089,1
+coco,Exact,-,-,text,1.0,1.0,2076.9,2048.0,250.444,0.089,1
+coco,Exact,-,-,image,1.0,1.0,1921.5,2048.0,250.444,0.03,1
+coco,Exact,-,-,text,1.0,1.0,2192.9,2048.0,250.444,0.03,1
