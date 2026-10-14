@@ -1,0 +1,23 @@
+laion_100k: db (100000, 512) | queries 1000 image + 1000 text | gt top-100
+building Exact ...
+built in 0.2s | index 204.80 MB | nodes per layer None
+  efSearch=None image  R@1=1.000  R@10=1.000+-0.000  R@100=1.000  ms/query=25.841+-0.217  dist/query=   nan
+  efSearch=None text   R@1=1.000  R@10=1.000+-0.000  R@100=1.000  ms/query=25.877+-0.204  dist/query=   nan
+PIPELINE CHECK PASSED (exact search gives recall 1.0)
+wrote D:\sc4020\hnsw\results\raw\laion_100k\exact.csv
+laion_100k: db (100000, 512) | queries 1000 image + 1000 text | gt top-100
+building HNSW ...
+built in 133.0s | index 232.02 MB | nodes per layer [100000, 3188, 95, 3]
+  efSearch=  16 image  R@1=0.943  R@10=0.918+-0.005  R@100=nan  ms/query=0.199+-0.001  dist/query=   501
+  efSearch=  16 text   R@1=0.761  R@10=0.712+-0.008  R@100=nan  ms/query=0.211+-0.002  dist/query=   527
+  efSearch=  32 image  R@1=0.966  R@10=0.962+-0.003  R@100=nan  ms/query=0.329+-0.002  dist/query=   760
+  efSearch=  32 text   R@1=0.857  R@10=0.816+-0.007  R@100=nan  ms/query=0.339+-0.002  dist/query=   788
+  efSearch=  64 image  R@1=0.989  R@10=0.986+-0.002  R@100=nan  ms/query=0.586+-0.004  dist/query=  1222
+  efSearch=  64 text   R@1=0.922  R@10=0.895+-0.005  R@100=nan  ms/query=0.604+-0.004  dist/query=  1268
+  efSearch= 128 image  R@1=0.995  R@10=0.995+-0.001  R@100=0.980  ms/query=1.031+-0.007  dist/query=  2026
+  efSearch= 128 text   R@1=0.961  R@10=0.943+-0.003  R@100=0.869  ms/query=1.075+-0.006  dist/query=  2137
+  efSearch= 256 image  R@1=0.998  R@10=0.998+-0.001  R@100=0.993  ms/query=1.937+-0.012  dist/query=  3401
+  efSearch= 256 text   R@1=0.978  R@10=0.970+-0.002  R@100=0.930  ms/query=2.056+-0.011  dist/query=  3700
+wrote D:\sc4020\hnsw\results\raw\laion_100k\hnsw.csv
+saved D:\sc4020\hnsw\results\hnsw_plots_laion_100k.png
+exit 0

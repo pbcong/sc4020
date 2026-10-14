@@ -1,0 +1,3 @@
+method,param_name,param_value,query_type,recall@1,recall@10,recall@100,qps,index_mb,build_s,recall@1_se,recall@10_se,recall@100_se,ms_per_query,ms_per_query_se,ms_per_query_batch,dist_comps_per_query
+Exact,none,,image,1.0,1.0,1.0,57.09834066635593,250.443821,0.11938590000136173,0.0,0.0,0.0,17.51364379997176,0.07419135807996848,0.578267799999594,
+Exact,none,,text,1.0,1.0,1.0,56.94358518129034,250.443821,0.11938590000136173,0.0,0.0,0.0,17.561240600083693,0.07849570492608396,0.5080847999997786,

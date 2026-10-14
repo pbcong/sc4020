@@ -1,0 +1,15 @@
+{
+  "method": "Exact",
+  "dataset": "laion_5k",
+  "n_db": 5000,
+  "faiss_version": "1.15.1",
+  "M_graph": null,
+  "efConstruction": null,
+  "ef_sweep": null,
+  "k": 10,
+  "threads": 1,
+  "timing_repeats": 1,
+  "nodes_per_layer": null,
+  "build_s": 0.0052520999997796025,
+  "index_mb": 10.240045
+}

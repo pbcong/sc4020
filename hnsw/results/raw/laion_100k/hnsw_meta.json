@@ -1,0 +1,26 @@
+{
+  "method": "HNSW",
+  "dataset": "laion_100k",
+  "n_db": 100000,
+  "faiss_version": "1.15.1",
+  "M_graph": 32,
+  "efConstruction": 200,
+  "ef_sweep": [
+    16,
+    32,
+    64,
+    128,
+    256
+  ],
+  "k": 10,
+  "threads": 1,
+  "timing_repeats": 5,
+  "nodes_per_layer": [
+    100000,
+    3188,
+    95,
+    3
+  ],
+  "build_s": 133.0138178999996,
+  "index_mb": 232.020834
+}

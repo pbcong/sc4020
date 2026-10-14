@@ -1,0 +1,27 @@
+{
+  "method": "HNSW",
+  "dataset": "coco_full",
+  "n_db": 122287,
+  "faiss_version": "1.15.1",
+  "M_graph": 32,
+  "efConstruction": 200,
+  "ef_sweep": [
+    16,
+    32,
+    64,
+    128,
+    256
+  ],
+  "k": 10,
+  "threads": 1,
+  "timing_repeats": 5,
+  "nodes_per_layer": [
+    122287,
+    3908,
+    118,
+    4,
+    1
+  ],
+  "build_s": 71.70040990000052,
+  "index_mb": 283.732886
+}
