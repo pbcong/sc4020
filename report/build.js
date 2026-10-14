@@ -133,25 +133,22 @@ const ABS = { left: 567, right: 567 };
 add(
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: [new TextRun({ text: "Abstract", bold: true, size: 22 })] }),
   new Paragraph({ alignment: AlignmentType.JUSTIFIED, indent: ABS, spacing: { after: 100, line: 252 }, children: runs(
-    "Text-to-image search engines embed captions and photos into a shared space with a contrastive model such as CLIP, then answer each caption with an approximate nearest neighbour (ANN) index built over the image vectors. Such indexes are normally built and tuned with the stored data, yet the queries they serve come from the text encoder, which CLIP places in a different region of the space (the *modality gap*). We present a controlled comparison of three ANN families — random-projection LSH (hashing), Product Quantization (quantization) and HNSW (graph) — on MS-COCO (122k images) and LAION (1M images), searching every index with both image and text queries under identical settings. All three methods lose recall on text queries at every operating point, and, contrary to the intuition that a data-independent method should be unaffected, LSH loses the most (up to 0.40 recall@100), ahead of PQ (0.17) and HNSW (0.19). We explain these results with a score-margin model: text queries have *low neighbour contrast*, which magnifies the error of approximate scoring (LSH, PQ), and they lie *far from all images*, which weakens greedy graph routing (HNSW), increasingly so as the corpus grows. A binomial analysis of LSH predicts the measured loss almost exactly. Guided by the model, we propose three query-aware construction methods that preserve the exact ground truth: caption-guided HNSW edges raise COCO text recall from 0.88 to 0.95 at no memory cost, query-weighted OPQ raises PQ text recall from 0.51 to 0.79 at 64 bytes per vector, and modality-aware centring roughly doubles LSH text recall at mid-range code lengths.", { size: 20 }) }),
+    "Text-to-image search engines embed captions and photos into a shared space with a contrastive model such as CLIP, then answer each caption with an approximate nearest neighbour (ANN) index built over the image vectors. Such indexes are normally built and tuned with the stored data, yet the queries they serve come from the text encoder, which CLIP places in a different region of the space (the *modality gap*). We present a controlled comparison of three ANN families — random-projection LSH (hashing), Product Quantization (quantization) and HNSW (graph) — on MS-COCO (122k images) and LAION (1M images), searching every index with both image and text queries under identical settings. All three methods lose recall on text queries at every operating point, and, contrary to the intuition that a data-independent method should be unaffected, LSH loses the most (up to 0.40 recall@100), ahead of PQ (0.17) and HNSW (0.19). We explain these results with a score-margin model: text queries have *low neighbour contrast*, which magnifies the error of approximate scoring (LSH, PQ), and they lie *far from all images*, which weakens greedy graph routing (HNSW), increasingly so as the corpus grows. A binomial analysis of LSH predicts the measured loss almost exactly. Guided by this, we improve each baseline for text queries while keeping the exact ground truth: caption-guided HNSW edges raise COCO text recall from 0.88 to 0.95 at no memory cost, query-weighted OPQ raises PQ text recall from 0.51 to 0.79 at 64 bytes per vector, and modality-aware centring roughly doubles LSH text recall at mid-range code lengths.", { size: 22 }) }),
   new Paragraph({ alignment: AlignmentType.JUSTIFIED, indent: ABS, spacing: { after: 280 }, children: [
-    new TextRun({ text: "Keywords: ", bold: true, size: 20 }),
-    new TextRun({ text: "approximate nearest neighbour search, locality-sensitive hashing, product quantization, HNSW, cross-modal retrieval, CLIP, out-of-distribution queries", italics: true, size: 20 })] }),
+    new TextRun({ text: "Keywords: ", bold: true, size: 22 }),
+    new TextRun({ text: "approximate nearest neighbour search, locality-sensitive hashing, product quantization, HNSW, cross-modal retrieval, CLIP, out-of-distribution queries", italics: true, size: 22 })] }),
 );
 
 // ---- 1 introduction
 add(H1("1", "Introduction"),
   P("Similarity search — retrieving the $k$ database items most similar to a query — underpins image search, recommendation and retrieval-augmented generation. The exact solution, a linear scan, compares the query with every stored vector and therefore costs $O(nd)$ for $n$ vectors of dimension $d$; on our one-million-image LAION corpus a single-threaded scan takes 104 ms per query. Approximate nearest neighbour (ANN) indexes trade a small loss in accuracy for large gains in speed or memory, either by making each comparison cheaper (compact codes, as in LSH and PQ) or by making fewer comparisons (partitioning or graph navigation)."),
   P("Contrastive vision–language models such as CLIP (Radford et al., 2021) make *cross-modal* search possible with the same machinery: a caption and a photo are mapped into one 512-dimensional space, and the photos closest to the caption are returned. The two modalities, however, are not mixed in that space. Each occupies its own narrow cone, and the cones are far apart (Liang et al., 2022): in our data a caption and its own photo have cosine similarity of only about 0.3. An index whose structure was learned from image vectors is therefore queried from a region it has never seen. The VIBE benchmark (Jääsaari et al., 2025) identifies such out-of-distribution (OOD) queries as a principal weakness of current ANN methods, but it does not explain *why* different index families fail, nor how much of the failure is intrinsic to the queries themselves."),
-  P("This report studies that question through a controlled experiment in which the index, its parameters and the ground truth are held fixed and only the query modality changes. We select one representative of each major ANN family, so that differences can be attributed to mechanisms rather than implementations: random-projection **LSH** (hashing; data-independent) and **Product Quantization** (quantization; codebooks learned from data), both covered in the course, and **HNSW** (graph; neighbourhood structure learned from data), which lies outside the syllabus and is the default index of pgvector, Milvus and Weaviate. We address three research questions:"),
-  N("**RQ1.** How do hashing, quantization and graph indexes trade accuracy, speed and memory on CLIP embeddings?", "rq"),
-  N("**RQ2.** How much recall does each family lose when the query is a caption rather than an image, and can a larger budget recover it?", "rq"),
-  N("**RQ3.** Which property of text queries causes the loss, and can index construction be adapted to it without changing the ground truth?", "rq"),
-  P("Our contributions are as follows:"),
-  B("A controlled cross-modal benchmark of three ANN families on two datasets that differ in scale (122k vs 1M images) and text style (clean captions vs web text)."),
-  B("A *score-margin* account of the modality penalty, which identifies two query properties — low neighbour contrast and distance from the data — and predicts which family each property affects. For LSH the account is quantitative: a binomial model reproduces the measured swap rates and the factor-of-eight increase in code length that text queries require."),
-  B("Three query-aware construction methods, one per family, that use a sample of training captions but leave the search algorithm and the exact ground truth unchanged, together with ablations of their components and two instructive negative results."),
-  P("Section 2 reviews the search problem and the modality gap. Section 3 describes the three methods with the formulation used in the course, then develops the score-margin model and derives the query-aware extensions from it. Section 4 reports the experiments, Section 5 discusses strengths, weaknesses and limitations, and Section 6 concludes."),
+  P("We study this with a controlled experiment in which the index, its parameters and the ground truth are held fixed and only the query modality changes. We select one representative of each major ANN family: random-projection **LSH** (hashing; data-independent) and **Product Quantization** (quantization; codebooks learned from data), both covered in the course, and **HNSW** (graph; neighbourhood structure learned from data), which lies outside the syllabus and is the default index of pgvector, Milvus and Weaviate. In this report we:"),
+  B("**Benchmark** the three methods and exact search on COCO (122k images) and LAION (1M images), sweeping each method's main parameter and searching every index with both image and text queries, to compare recall, speed, memory and build time."),
+  B("**Analyse** why text queries lose recall, by measuring how they differ from image queries and relating each query's recall to those differences; for LSH, a simple probabilistic model predicts the measured loss."),
+  B("**Run ablations** on HNSW's build parameters, the corpus size and the offset between the two modalities."),
+  B("**Improve the baselines** for text queries using a sample of training captions, adapting ideas from prior work: modality-aware centring for LSH, query-weighted OPQ for PQ, and caption-guided edges for HNSW. None of them changes the search algorithm or the exact ground truth."),
+  P("Section 2 reviews the search problem and the modality gap. Section 3 describes the three methods with the formulation used in the course, a simple model of when they fail on text queries, and the improvements we test. Section 4 reports the experiments, Section 5 discusses strengths, weaknesses and limitations, and Section 6 concludes."),
 );
 
 // ---- 2 background
@@ -284,7 +281,7 @@ add(H1("4", "Experiments"),
   ...figure("fig1_neighbour_similarity.png", 1720, 681, 1, "Similarity of each query to its 1st–100th true neighbour (solid: image queries; dashed: text queries; band: 10th–90th percentile)."),
   P("Figure 1 shows that text queries differ in exactly the two properties singled out in Section 3.5. They are **far from the data**: the most similar image has similarity 0.35, against 0.86 for an image query. And their neighbours are **bunched**: the contrast $γ$ between the 1st and 100th neighbour is about half that of image queries (0.046 vs 0.087 on COCO). By Eq. (" + EN.rho + "), the same absolute estimation error is therefore roughly twice as damaging for a text query."),
 
-  H2("4.3", "Accuracy–efficiency trade-off (RQ1)"),
+  H2("4.3", "Accuracy–efficiency trade-off"),
   P("With image queries the three families behave as their designs predict (Figures 2 and 3, Table 4)."),
   ...figure("fig2_recall_vs_qps.png", 1722, 854, 2, "Recall@100 vs single-thread queries per second. Colour denotes the method; solid lines and filled markers are image queries, dashed lines and hollow markers text queries; the star is exact search."),
   ...figure("fig3_recall_vs_memory.png", 1685, 854, 3, "Recall@100 vs index size in bytes per vector."),
@@ -311,7 +308,7 @@ add(H1("4", "Experiments"),
      ["512", "0.577 / 0.181", "0.657 / 0.515", "0.504 / 0.113", "0.560 / 0.438"]],
     [1.2, 2, 2, 2, 2]),
 
-  H2("4.4", "The cost of querying with text (RQ2)"),
+  H2("4.4", "The cost of querying with text"),
   P("**Every method loses recall on text queries at every setting** (Figure 4, Table 6; all gaps are many standard errors from zero), but the loss behaves differently in each family."),
   ...figure("fig4_param_sweep_gap.png", 2498, 1222, 4, "Image (solid) and text (dashed) recall@100 across each method's parameter. The shaded area is the gap Δ."),
   ...table(6, "The gap Δ = recall@100(image) − recall@100(text) at the ends of each parameter sweep.",
@@ -337,7 +334,7 @@ add(H1("4", "Experiments"),
     [1.1, 3, 1.8, 1.4, 1.4]),
   P("An engine tuned on image queries and then served captions would deliver 10–20 points less recall than its benchmark promised, and recovering it would cost 3–5× more search time."),
 
-  H2("4.5", "Testing the score-margin model (RQ3)"),
+  H2("4.5", "Testing the score-margin model"),
   P("We now test the two predictions of Section 3.5 query by query (Figure 5)."),
   ...figure("fig5_which_queries_fail.png", 1982, 1262, 5, "Per-query recall@100, with queries grouped into 12 equal-size bins. Left: HNSW against the query's similarity to its nearest image, $s_{(1)}$. Right: PQ against the neighbour contrast $γ$."),
   P(R`**(P1) Low contrast defeats approximate scoring.** For PQ, per-query recall rises with the neighbour contrast (Spearman $ρ$ up to +0.51), and 39% of COCO text queries — against 3% of image queries — obtain recall below 0.5. Notably, the absolute PQ score error is *smaller* for text queries (RMS 0.038 vs 0.052 on COCO at $M=64$); what differs is the margin, so the noise-to-margin ratio of Eq. (${EN.rho}) is 0.78 for text against 0.57 for images.`),
@@ -471,7 +468,7 @@ add(H1("", "References"),
     "Y. A. Malkov, D. A. Yashunin. Efficient and robust approximate nearest neighbor search using hierarchical navigable small world graphs. IEEE TPAMI 42(4), 2020.",
     "A. Radford et al. Learning transferable visual models from natural language supervision. ICML, 2021.",
     "C. Schuhmann et al. LAION-400M: open dataset of CLIP-filtered 400 million image-text pairs. arXiv:2111.02114, 2021.",
-  ].map((r) => new Paragraph({ numbering: { reference: "refs", level: 0 }, children: runs(r, { size: 20 }),
+  ].map((r) => new Paragraph({ numbering: { reference: "refs", level: 0 }, children: runs(r, { size: 22 }),
     spacing: { after: 60, line: 240 }, alignment: AlignmentType.JUSTIFIED })),
 );
 
@@ -495,8 +492,6 @@ const doc = new Document({
     { reference: "bullets", levels: [{ level: 0, format: LevelFormat.BULLET, text: "•", alignment: AlignmentType.LEFT,
       style: { paragraph: { indent: { left: 500, hanging: 280 } } } }] },
     numbered("nums", "%1."), numbered("refs", "[%1]"),
-    { reference: "rq", levels: [{ level: 0, format: LevelFormat.NONE, text: "", alignment: AlignmentType.LEFT,
-      style: { paragraph: { indent: { left: 500, hanging: 0 } } } }] },
   ] },
   sections: [{
     properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } } },
