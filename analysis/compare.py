@@ -171,7 +171,7 @@ def fig_param_gap(delta):
             ax.set_xscale("log", base=2)
             ax.set_xticks(g["param"], [str(p) for p in g["param"]], fontsize=7)
             ax.minorticks_off()
-            ax.set_title(f"{m} — {TITLES[name]}", color=INK)
+            ax.set_title(f"{m}: {TITLES[name]}", color=INK)
             ax.set_xlabel(PARAM_NAME[m])
             ax.set_ylabel("recall@100")
             if i == 0 and j == 0:
@@ -260,7 +260,7 @@ def fig_failure(delta, profiles):
             for qt, ls, mfc in (("image", "-", COLOR[m]), ("text", "--", "white")):
                 bx, by = binned(xs[qt], pq[f"{qt}_recall@100"], edges)
                 ax.plot(bx, by, marker="o", color=COLOR[m], ls=ls, mfc=mfc, mec=COLOR[m], label=f"{qt} queries")
-            ax.set_title(f"{m} ({'efSearch ' if m == 'HNSW' else 'M='}{param}) — {TITLES[name]}", color=INK)
+            ax.set_title(f"{m} ({'efSearch ' if m == 'HNSW' else 'M='}{param}): {TITLES[name]}", color=INK)
             ax.set_xlabel(xlabel)
             ax.set_ylabel("mean recall@100 of queries in bin")
             if i == 0:

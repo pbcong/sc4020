@@ -215,7 +215,7 @@ def fig_pq_fixes(lines):
             ax.set_xscale("log", base=2)
             ax.set_xticks([16, 32, 64], ["16", "32", "64"])
             ax.minorticks_off()
-            ax.set_title(f"{TITLES[name]} — {qt} queries", color=INK)
+            ax.set_title(f"{TITLES[name]}: {qt} queries", color=INK)
             ax.set_ylabel("recall@100")
             if i == 1:
                 ax.set_xlabel("M (bytes per vector)")
@@ -258,7 +258,7 @@ def fig_lsh_variants(lines):
             ticks = sorted(d["param"].unique())
             ax.set_xticks(ticks, [str(int(t)) for t in ticks], fontsize=7)
             ax.minorticks_off()
-            ax.set_title(f"{TITLES[name]} — {qt} queries", color=INK)
+            ax.set_title(f"{TITLES[name]}: {qt} queries", color=INK)
             ax.set_ylabel("recall@100")
             if i == 1:
                 ax.set_xlabel("nbits (bits per vector)")
