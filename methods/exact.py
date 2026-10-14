@@ -1,10 +1,12 @@
 import argparse
 import os
+import sys
 import time
 
 import faiss
 
-from evaluate import faiss_index_bytes, load_dataset, run_benchmark
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from evaluate import faiss_index_bytes, load_dataset, run_benchmark  # noqa: E402
 
 
 def main():

@@ -1,13 +1,14 @@
-// Builds the technical-review report. Usage: NODE_PATH=<dir with docx> node report_build.js [out.docx]
+// Builds the technical-review report. Usage (from report/): npm install && node build.js [out.docx]
 const fs = require("fs");
+const path = require("path");
 const {
   Document, Packer, Paragraph, TextRun, ImageRun, Table, TableRow, TableCell, AlignmentType, HeadingLevel,
   WidthType, BorderStyle, LevelFormat, Footer, Header, PageNumber, TableLayoutType, TabStopType,
 } = require("docx");
-const { math } = require("./report_omml");
+const { math } = require("./omml");
 
-const FIG = "/home/linzhuoyi/testing/SC4020/code/results/figures/";
-const OUT = process.argv[2] || "group_XX_report.docx";
+const FIG = path.join(__dirname, "..", "results", "figures") + path.sep;
+const OUT = process.argv[2] || path.join(__dirname, "group_XX_report.docx");
 const TEXT_W = 9026; // A4 width 11906 minus 2 x 1440 margins (DXA)
 const FONT = "Times New Roman";
 const R = String.raw;

@@ -1,9 +1,11 @@
 import os
+import sys
 
 import h5py
 import numpy as np
 
-from common import DATA_ROOT, GT_K, N_QUERIES, SEED, exact_topk, l2_normalize, write_prepared
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import DATA_ROOT, GT_K, N_QUERIES, SEED, exact_topk, l2_normalize, write_prepared  # noqa: E402
 
 SRC = os.path.join(DATA_ROOT, "laion", "laion-clip-512-normalized.hdf5")
 

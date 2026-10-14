@@ -1,13 +1,15 @@
 import argparse
 import os
+import sys
 import time
 
 import faiss
 import h5py
 import numpy as np
 
-from common import SEED, prepared_path
-from evaluate import QUERY_TYPES, Data, faiss_index_bytes, reconstruction_mse, run_benchmark
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import SEED, prepared_path  # noqa: E402
+from evaluate import QUERY_TYPES, Data, faiss_index_bytes, reconstruction_mse, run_benchmark  # noqa: E402
 
 MSE_SAMPLE = 10000
 ADD_CHUNK = 8192  # peak encode table: 8192 x 256 x M floats = 0.5 GB at M=64

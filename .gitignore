@@ -18,3 +18,4 @@ coco_meta.json
 .DS_Store
 
 project-description.pdf
+node_modules/

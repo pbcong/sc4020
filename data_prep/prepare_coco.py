@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import sys
 
 import numpy as np
 import open_clip
@@ -8,7 +9,8 @@ import torch
 from PIL import Image
 from torch.utils.data import DataLoader, Dataset
 
-from common import DATA_ROOT, N_QUERIES, SEED, exact_topk, l2_normalize, write_prepared
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import DATA_ROOT, N_QUERIES, SEED, exact_topk, l2_normalize, write_prepared  # noqa: E402
 
 COCO_ROOT = os.path.expanduser(os.environ.get("COCO_ROOT", "~/coco2014"))
 MODEL, PRETRAINED = "ViT-B-32-quickgelu", "openai"

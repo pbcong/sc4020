@@ -17,13 +17,15 @@ import argparse
 import csv
 import json
 import os
+import sys
 import time
 
 import faiss
 import numpy as np
 
-from common import DATA_ROOT, SEED, exact_topk, l2_normalize
-from evaluate import QUERY_TYPES, Data, faiss_index_bytes, load_dataset, run_benchmark
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import DATA_ROOT, SEED, exact_topk, l2_normalize  # noqa: E402
+from evaluate import QUERY_TYPES, Data, faiss_index_bytes, load_dataset, run_benchmark  # noqa: E402
 
 OUT = "results/ablations"
 THREADS = len(os.sched_getaffinity(0))

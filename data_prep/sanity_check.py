@@ -1,10 +1,12 @@
+import os
 import sys
 import time
 
 import faiss
 import numpy as np
 
-from evaluate import QUERY_TYPES, faiss_index_bytes, load_dataset, recall_at_k, run_benchmark
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from evaluate import QUERY_TYPES, faiss_index_bytes, load_dataset, recall_at_k, run_benchmark  # noqa: E402
 
 
 def check(name):

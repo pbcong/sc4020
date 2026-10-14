@@ -1,6 +1,6 @@
 """Figures and tables for the ablations / improvements (results/ablations/*.csv).
 
-python compare_ablations.py   -> results/figures/fig7..fig10, results/tables/ablations.md
+python analysis/compare_ablations.py   -> results/figures/fig7..fig10, results/tables/ablations.md
 """
 import glob
 import json

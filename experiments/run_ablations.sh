@@ -2,7 +2,7 @@
 # Runs every ablation / improvement job at once in tmux session "sc4020-abl", one window per job,
 # each pinned to its own CPU block (timing uses the block's first core). Logs: results/ablations/logs/.
 set -euo pipefail
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 PY=${PY:-.venv/bin/python}
 LOG=results/ablations/logs
 mkdir -p $LOG
@@ -13,7 +13,7 @@ tmux new-session -d -s $SESSION -n idle
 job() {  # job <name> <cpus> <ablations.py args...>
   local name=$1 cpus=$2; shift 2
   tmux new-window -t $SESSION -n "$name" \
-    "taskset -c $cpus $PY ablations.py $* 2>&1 | tee $LOG/$name.log; echo EXIT \${PIPESTATUS[0]} >> $LOG/$name.log"
+    "taskset -c $cpus $PY experiments/ablations.py $* 2>&1 | tee $LOG/$name.log; echo EXIT \${PIPESTATUS[0]} >> $LOG/$name.log"
 }
 
 # LAION (999k)

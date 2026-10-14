@@ -1,16 +1,18 @@
 """Exact top-K images for a sample of training captions on one GPU (CuPy, fp32), cached for ablations.py qedges.
 
-CUDA_VISIBLE_DEVICES=6 python gpu_topk.py --dataset laion --n-text 999448 --K 16
+CUDA_VISIBLE_DEVICES=6 python data_prep/gpu_topk.py --dataset laion --n-text 999448 --K 16
 """
 import argparse
 import os
+import sys
 import time
 
 import cupy as cp
 import h5py
 import numpy as np
 
-from common import DATA_ROOT, SEED, prepared_path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import DATA_ROOT, SEED, prepared_path  # noqa: E402
 
 
 def cache_path(name, n_text, K):

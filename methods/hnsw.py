@@ -2,13 +2,15 @@ import argparse
 import csv
 import json
 import os
+import sys
 import time
 
 import faiss
 import numpy as np
 
-from common import DATA_ROOT
-from evaluate import QUERY_TYPES, faiss_index_bytes, load_dataset, run_benchmark
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import DATA_ROOT  # noqa: E402
+from evaluate import QUERY_TYPES, faiss_index_bytes, load_dataset, run_benchmark  # noqa: E402
 
 # FAISS searches with max(efSearch, k), so with k = 100 any efSearch below 100 behaves like 100.
 EF_SEARCH = [100, 128, 192, 256, 384, 512, 768, 1024]

@@ -1,9 +1,10 @@
 """Success / failure cases on COCO: for a few captions, the exact top-10 images next to each method's top-10.
 
-python examples.py   -> results/figures/fig12_examples.{png,pdf}
+python analysis/examples.py   -> results/figures/fig12_examples.{png,pdf}
 """
 import json
 import os
+import sys
 
 import faiss
 import matplotlib
@@ -13,10 +14,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
-from ablations import add_query_edges, new_pq, train_add
-from common import DATA_ROOT, SEED
-from compare import COLOR, INK, INK2, save
-from evaluate import load_dataset, perquery_recall
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "experiments"))
+from ablations import add_query_edges, new_pq, train_add  # noqa: E402
+from common import DATA_ROOT, SEED  # noqa: E402
+from compare import COLOR, INK, INK2, save  # noqa: E402
+from evaluate import load_dataset, perquery_recall  # noqa: E402
 
 COCO_ROOT = os.path.expanduser(os.environ.get("COCO_ROOT", "~/coco2014"))
 EF, PQ_M, SHOW = 100, 64, 10

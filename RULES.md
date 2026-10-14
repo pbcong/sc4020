@@ -29,5 +29,5 @@ Similarity = inner product (= cosine, vectors are unit norm).
 
 ## Files
 - Data (not submitted): `/raid/linzhuoyi_sc4020/data/{coco,laion}/*_prepared.hdf5`
-- Code: `evaluate.py` (shared, do not fork), `common.py`, `prepare_*.py`, `sanity_check.py`
+- Code: `evaluate.py` (shared, do not fork), `common.py`, `data_prep/prepare_*.py`, `data_prep/sanity_check.py`
 - Results: `results/<dataset>_<method>.csv` (same columns for everyone)

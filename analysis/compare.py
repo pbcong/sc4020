@@ -1,10 +1,11 @@
 """Task 5: merge result CSVs, make the report figures and tables.
 
-python compare.py            -> results/figures/*.png|pdf, results/tables/*.csv|md
+python analysis/compare.py   -> results/figures/*.png|pdf, results/tables/*.csv|md
 """
 import glob
 import os
 import re
+import sys
 
 import matplotlib
 
@@ -13,7 +14,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from evaluate import load_dataset
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from evaluate import load_dataset  # noqa: E402
 
 DATASETS = ["coco", "laion"]
 TITLES = {"coco": "COCO (122k images)", "laion": "LAION (999k images)"}

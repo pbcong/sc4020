@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # All LSH configs at once (tmux session "sc4020-lsh"): one job per (dataset, variant, nbits), 3 seeds each,
-# each pinned to its own idle physical core and spread across NUMA nodes; parts merged by merge_lsh.py.
+# each pinned to its own idle physical core and spread across NUMA nodes; parts merged by methods/merge_lsh.py.
 set -euo pipefail
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 PY=${PY:-.venv/bin/python}
 CORES=${CORES:-$(seq 32 127)}
 LOG=results/lsh_parts/logs
