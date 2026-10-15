@@ -410,7 +410,7 @@ add(H1("4", "Experiments"),
   H3("Modality-aware LSH"),
   ...figure("fig11_lsh_variants.png", 1983, 682, 11, "LSH variants: text-query recall@100 against code length. Median thresholds and image-mean centring overlap."),
   P("Modality-aware centring is meant to improve text queries, not image queries, so Figure 11 compares plain LSH with the three variants from Section 3.6 on text queries only."),
-  B("**Image queries (not plotted):** modality-aware centring does not change how image queries are hashed, so their recall is exactly that of image-mean centring. The three data-dependent variants give practically the same image recall, which is better than plain LSH with few bits (COCO, 128 bits: 0.27 to 0.35) and slightly worse at 4,096 bits (0.77 against 0.84)."),
+  B("**Image queries:** the results are the same as with image-mean centring, since modality-aware centring hashes image queries in exactly the same way."),
   B(R`**Text queries with image-based adjustments:** median thresholds and image-mean centring make text recall much worse. At 4,096 bits it drops to 0.22 on COCO and 0.07 on LAION, from 0.56 and 0.52. Every hyperplane now passes through the image cone, so a text query, which lies outside it, ends up on the same side of most hyperplanes and its code hardly changes from query to query, as expected from Section 3.6.`),
   B("**Modality-aware centring (Eq. " + EN.lshqa + ")** fixes this and does better than plain LSH. Text recall roughly doubles at medium code lengths (COCO, 512 bits: 0.18 to 0.33; LAION, 1,024 bits: 0.23 to 0.40), and the LAION gap at 4,096 bits falls from 0.29 to 0.12."),
 
