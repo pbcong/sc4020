@@ -1,7 +1,7 @@
 {
   "name": "sc4020-report",
   "private": true,
-  "description": "Builds group_XX_report.docx from build.js",
+  "description": "Builds group_21_report.docx from build.js",
   "scripts": { "build": "node build.js" },
   "dependencies": { "docx": "9.5.1" }
 }

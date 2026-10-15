@@ -1,7 +1,7 @@
 # SC4020 Project 1: similarity search with text→image queries
 
 LSH, PQ and HNSW on CLIP embeddings (COCO, LAION), each searched with image and text queries.
-The report is `report/group_XX_report.docx`.
+The report is `report/group_21_report.docx`.
 
 ## Layout
 ```
@@ -83,5 +83,5 @@ bash experiments/run_ablations.sh      # all ablation / query-aware jobs in tmux
 python analysis/compare.py             # results/figures/fig1..fig6, results/tables/
 python analysis/compare_ablations.py   # results/figures/fig7..fig11, results/tables/ablations.md
 python analysis/examples.py            # results/figures/fig12_examples
-cd report && npm install && node build.js   # rebuilds report/group_XX_report.docx
+cd report && npm install && node build.js   # rebuilds report/group_21_report.docx
 ```

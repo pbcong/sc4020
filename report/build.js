@@ -8,7 +8,7 @@ const {
 const { math } = require("./omml");
 
 const FIG = path.join(__dirname, "..", "results", "figures") + path.sep;
-const OUT = process.argv[2] || path.join(__dirname, "group_XX_report.docx");
+const OUT = process.argv[2] || path.join(__dirname, "group_21_report.docx");
 const TEXT_W = 9026; // A4 width 11906 minus 2 x 1440 margins (DXA)
 const FONT = "Times New Roman";
 const R = String.raw;
@@ -124,7 +124,10 @@ add(
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 },
     children: [new TextRun({ text: "Topic: Similarity Search (LSH, PQ and HNSW for Text-to-Image Search)", bold: true, size: 28 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 },
-    children: [new TextRun({ text: "Group XX: [member names]", size: 22 })] }),
+    children: [new TextRun({ text: "Group 21", bold: true, size: 22 })] }),
+  ...[["Pham Ba Cong", "U2331760J"], ["Phan The Manh", "[matric no.]"], ["Chu Gia Han", "[matric no.]"], ["Pham Gia Phuc", "[matric no.]"]]
+    .map(([name, id]) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 20 },
+      children: [new TextRun({ text: `${name} (${id})`, size: 22 })] })),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 320 },
     children: [new TextRun({ text: "Nanyang Technological University", size: 20, italics: true })] }),
 );
@@ -392,7 +395,7 @@ const numbered = (ref, text) => ({ reference: ref, levels: [{ level: 0, format: 
   alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 540, hanging: 420 } } } }] });
 const small = (children) => new Paragraph({ alignment: AlignmentType.CENTER, children });
 const doc = new Document({
-  creator: "SC4020 Group XX",
+  creator: "SC4020 Group 21",
   title: "SC4020 Project 1: Technical Review Report - Similarity Search",
   styles: {
     default: { document: { run: { font: FONT, size: 22 } } },
