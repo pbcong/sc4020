@@ -120,13 +120,13 @@ const add = (...xs) => xs.flat().forEach((x) => body.push(x));
 // ---- title block
 add(
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 200, after: 100 },
-    children: [new TextRun({ text: "When the Query Speaks a Different Language:", bold: true, size: 34 })] }),
+    children: [new TextRun({ text: "SC4020 Project 1: Technical Review Report", bold: true, size: 34 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 },
-    children: [new TextRun({ text: "Hashing, Quantization and Graph Indexes for Cross-Modal Nearest Neighbour Search", bold: true, size: 28 })] }),
+    children: [new TextRun({ text: "Topic: Similarity Search (LSH, PQ and HNSW for Text-to-Image Search)", bold: true, size: 28 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 },
     children: [new TextRun({ text: "Group XX: [member names]", size: 22 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 320 },
-    children: [new TextRun({ text: "SC4020 Project 1: Technical Review (Similarity Search), Nanyang Technological University", size: 20, italics: true })] }),
+    children: [new TextRun({ text: "Nanyang Technological University", size: 20, italics: true })] }),
 );
 
 // ---- abstract
@@ -134,7 +134,7 @@ const ABS = { left: 567, right: 567 };
 add(
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: [new TextRun({ text: "Abstract", bold: true, size: 22 })] }),
   new Paragraph({ alignment: AlignmentType.JUSTIFIED, indent: ABS, spacing: { after: 280, line: 252 }, children: runs(
-    "Text-to-image search engines turn captions and images into vectors with CLIP and then search the image vectors with an approximate nearest neighbour (ANN) method. The index is built from images, but the queries are captions, and CLIP places text and image vectors in different regions of the space (the *modality gap*). We compare three ANN methods from three families, LSH with random projection (hashing), Product Quantization (PQ) and HNSW (graph), on MS-COCO (122k images) and LAION (1M images). Every index is searched with both image queries and text queries using the same settings. All three methods lose recall on text queries. Surprisingly, LSH, which does not learn from the data, loses the most (up to 0.40 recall@100, against 0.17 for PQ and 0.19 for HNSW). We show that two properties of text queries cause this: their top-k neighbours have very similar scores, and they are far from every image. Based on this, we improve each method for text queries: caption-guided edges raise HNSW text recall on COCO from 0.88 to 0.95 with no extra memory, query-weighted OPQ raises PQ text recall from 0.51 to 0.79, and centring each modality separately roughly doubles LSH text recall at medium code lengths.", { size: 22 }) }),
+    "Text-to-image search engines turn captions and images into vectors with CLIP and then search the image vectors with an approximate nearest neighbour (ANN) method. The index is built from images, but the queries are captions, and CLIP places text and image vectors in different regions of the space (the *modality gap*). We compare three ANN methods from three families, LSH with random projection (hashing), Product Quantization (PQ) and HNSW (graph), on MS-COCO (122k images) and LAION (1M images). Every index is searched with both image queries and text queries using the same settings. We measure recall, the fraction of the exact top-100 results that each method returns. All three methods lose recall on text queries. Surprisingly, LSH, which does not learn from the data, loses the most (up to 0.40, against 0.17 for PQ and 0.19 for HNSW). We show that two properties of text queries cause this: their top-k neighbours have very similar scores, and they are far from every image. Based on this, we improve each method using a sample of training captions. For HNSW, we add links between images that match the same caption, which raises text recall on COCO from 0.88 to 0.95 with no extra memory. For PQ, we fit the centroids to reduce the score error for captions instead of images, which raises text recall from 0.51 to 0.79. For LSH, we shift text and image vectors by their own mean before hashing, which roughly doubles text recall at medium code lengths.", { size: 22 }) }),
 );
 
 // ---- 1 introduction
@@ -163,9 +163,9 @@ add(H1("2", "Methods"),
     [2.6, 1.3, 1.4, 1.3, 1.9, 1.9]),
 
   H2("2.2", "LSH with random projection"),
-  P(R`As in the lecture, we generate $b$ hashing functions by drawing $b$ random vectors $w_{1},…,w_{b}$ from a standard Gaussian distribution. Each hashing function turns an input vector into one bit:`),
+  P(R`As in the lecture, we generate $b$ hashing functions by drawing $b$ random vectors $w_{1},…,w_{b}$ from a standard Gaussian distribution. Each hashing function turns an input vector into one bit ($1[·]$ is 1 if the condition holds and 0 otherwise):`),
   EQ(R`h_{i}(x)=1\b{w_{i}^{⊤}x>0}, H(x)=(h_{1}(x),…,h_{b}(x))∈\c{0,1}^{b}`, "hash"),
-  P(R`The $b$ bits form the binary vector of $x$. The whole database is converted into binary vectors once (offline), and at query time only the query is converted (online). We then run linear search on the binary vectors using the Hamming distance, which only needs an XOR and a bit count, so it is much cheaper than a distance on float values. A 512-bit binary vector takes 64 bytes, 32 times less than the 2,048-byte float vector. We use LSH + linear search (FAISS IndexLSH) instead of hash tables because it returns a full top-100 list. Results are averaged over three random seeds (standard deviation of recall below 0.01).`),
+  P(R`The $b$ bits form the binary vector of $x$. The whole database is converted into binary vectors once (offline), and at query time only the query is converted (online). We then run linear search on the binary vectors using the Hamming distance, which only needs an XOR and a bit count, so it is much cheaper than a distance on float values. A 512-bit binary vector takes 64 bytes, 32 times less than the 2,048-byte float vector. We use LSH + linear search, implemented with IndexLSH from the FAISS library (Douze et al., 2024), instead of hash tables because it returns a full top-100 list. Results are averaged over three random seeds (standard deviation of recall below 0.01).`),
   P(R`**Why more bits give better results.** A random hyperplane separates two vectors with a probability equal to the angle between them divided by $π$ (Charikar, 2002):`),
   EQ(R`Pr\b{h_{i}(q)≠h_{i}(x)}=\frac{θ(q,x)}{π} ⇒ E\b{D_{H}(q,x)}=\frac{b θ(q,x)}{π}`, "charikar"),
   P(R`So the Hamming distance $D_{H}$ estimates the angle, and the estimate gets more accurate as $b$ grows. This is why, as shown in the lecture, more hashing functions give more accurate top-$k$ results. We can make this precise. Let $u$ be a true neighbour and $v$ a non-neighbour, with angular margin $δ=(θ(q,v)−θ(q,u))/π>0$. Treating the bits as independent, the probability that the binary vectors rank $v$ above $u$ is approximately`),
@@ -201,7 +201,7 @@ add(H1("2", "Methods"),
   P(R`with $μ_{T}$ estimated from the training captions. The database and image queries are hashed as before, so image-query results do not change and there is no extra build cost.`),
   P(R`**Query-weighted PQ.** Eq. (${EN.scoreerr}) says that the error that matters is weighted by $S$. Let $A=S^{1/2}$. If we index $x'=Ax$ and search with $q'=A^{−1}q$, every inner product stays the same, $\a{q',x'}=\a{q,x}$, so the ground truth does not change. But now ordinary k-means minimises the average score error for these queries:`),
   EQ(R`\n{x'−\hat{x}'}^{2}=(x−\hat{x})^{⊤}S(x−\hat{x})=E_{q}\b{\a{q,x−\hat{x}}^{2}}`, "qa2"),
-  P(R`We estimate $S$ from 200,000 training captions (*text-weighted*) or as the average of the caption and image statistics (*mixed*), add $0.01·\bar{λ}$ to its eigenvalues for stability, and combine it with the OPQ rotation. The extra query cost is one $512×512$ matrix–vector product. The idea is related to ScaNN's anisotropic loss (Guo et al., 2020), which also weights quantization error by its effect on inner products.`),
+  P(R`We estimate $S$ from 200,000 training captions (*text-weighted*) or as the average of the caption and image statistics (*mixed*), add a small constant to its eigenvalues for stability, and combine it with the OPQ rotation. The extra query cost is one $512×512$ matrix–vector product.`),
   P(R`**Caption-guided edges for HNSW.** HNSW links images that are similar to each other. The true neighbours of a caption, however, may not be similar to each other: a street scene and a close-up of a bus can both match “a red bus in a city”. Following RoarGraph and OOD-DiskANN, we add edges between images that are relevant to the same caption (Algorithm 1).`),
   ...algorithm("**Algorithm 1.** Caption-guided edge insertion", [
     [0, "**Input:** HNSW graph $G$ with bottom-layer capacity $2M$ per node; image vectors $X$; training captions $T$; $K=16$; per-node cap $E_{max}=16$"],
@@ -213,7 +213,7 @@ add(H1("2", "Methods"),
     [1, "add $u$'s proposed edges to its bottom-layer list, most-proposed first, while free slots remain and at most $E_{max}$ are added"],
     [0, "**Output:** $G'$, with the same memory and the same search procedure"],
   ]),
-  P(R`The new edges go into bottom-layer slots that HNSW has allocated but left empty (the average degree is 21.6 on COCO and 23.1 on LAION, out of 64), so memory and the search code do not change. As ablations we also try (i) starting the search from the true neighbours of the most similar training captions, and (ii) inserting the captions into the graph as extra nodes that are never returned.`),
+  P(R`The new edges go into bottom-layer slots that HNSW has allocated but left empty (the average degree is 21.6 on COCO and 23.1 on LAION, out of 64), so memory and the search code do not change. As ablations we also try two other uses of the captions: *caption entry points*, which start the search from the true neighbours of the most similar training captions, and *captions as graph nodes*, which insert the captions into the graph as extra nodes that are never returned.`),
 );
 
 // ---- 3 experiments
@@ -229,7 +229,7 @@ add(H1("3", "Experiments"),
      ["Ground truth", "Exact top-100 by linear search", "Exact top-100 (agrees with VIBE's to ≥ 0.999)"]],
     [2, 3.5, 3.5]),
   P("**Datasets.** COCO (Lin et al., 2014) and LAION (Schuhmann et al., 2021) differ in size (8×) and in the kind of text: clean human-written captions on COCO and noisy web text on LAION (Table 2). On COCO the image and text queries describe the same 1,000 images, so the only difference between the two query sets is which CLIP encoder produced them."),
-  P("**Protocol.** We follow VIBE (Jääsaari et al., 2026) and ann-benchmarks (Aumüller et al., 2020). (i) Indexes are built from the database only and never see a test query. (ii) Each index is built once and searched with both image and text queries using the same parameters, so any difference comes from the queries. (iii) Queries are sent one at a time on a single CPU thread, and we report the fastest of several runs. All runs used one server (2× AMD EPYC 7742) with FAISS 1.15.1 (Douze et al., 2024) and fixed random seeds."),
+  P("**Protocol.** We follow VIBE (Jääsaari et al., 2026) and ann-benchmarks (Aumüller et al., 2020). (i) Indexes are built from the database only and never see a test query. (ii) Each index is built once and searched with both image and text queries using the same parameters, so any difference comes from the queries. (iii) Queries are sent one at a time on a single CPU thread, and we report the fastest of several runs. All runs used one server (2× AMD EPYC 7742) with FAISS 1.15.1 and fixed random seeds."),
   P(R`**Metrics.** Our main metric is recall@100 (Eq. ${EN.recall}). We also report recall@10, queries per second (QPS), index size in bytes per vector and build time. The gap between the two query types, on the same index with the same setting, is`),
   EQ(R`Δ=Recall@100(Q_{image})−Recall@100(Q_{text})`, "delta"),
   P("We never average image and text recall, because their difference is what we study."),
@@ -375,7 +375,6 @@ add(H1("", "References"),
     "M. Chen et al. RoarGraph: a projected bipartite graph for efficient cross-modal approximate nearest neighbor search. VLDB, 2024.",
     "M. Douze et al. The Faiss library. arXiv:2401.08281, 2024.",
     "T. Ge, K. He, Q. Ke, J. Sun. Optimized product quantization. IEEE TPAMI 36(4), 2014.",
-    "R. Guo, P. Sun, E. Lindgren, Q. Geng, D. Simcha, F. Chern, S. Kumar. Accelerating large-scale inference with anisotropic vector quantization. ICML, 2020.",
     "E. Jääsaari, V. Hyvönen, M. Ceccarello, T. Roos, M. Aumüller. VIBE: Vector Index Benchmark for Embeddings. Journal of Data-centric Machine Learning Research, 2026. arXiv:2505.17810.",
     "S. Jaiswal et al. OOD-DiskANN: efficient and scalable graph ANNS for out-of-distribution queries. arXiv:2211.12850, 2022.",
     "H. Jégou, M. Douze, C. Schmid. Product quantization for nearest neighbor search. IEEE TPAMI 33(1), 2011.",
@@ -394,7 +393,7 @@ const numbered = (ref, text) => ({ reference: ref, levels: [{ level: 0, format: 
 const small = (children) => new Paragraph({ alignment: AlignmentType.CENTER, children });
 const doc = new Document({
   creator: "SC4020 Group XX",
-  title: "Hashing, Quantization and Graph Indexes for Cross-Modal Nearest Neighbour Search",
+  title: "SC4020 Project 1: Technical Review Report - Similarity Search",
   styles: {
     default: { document: { run: { font: FONT, size: 22 } } },
     paragraphStyles: [
@@ -411,7 +410,7 @@ const doc = new Document({
   ] },
   sections: [{
     properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } } },
-    headers: { default: new Header({ children: [small([new TextRun({ text: "SC4020 Technical Review: Cross-Modal Nearest Neighbour Search", size: 17, italics: true, color: "555555" })])] }) },
+    headers: { default: new Header({ children: [small([new TextRun({ text: "SC4020 Project 1 Report: Similarity Search", size: 17, italics: true, color: "555555" })])] }) },
     footers: { default: new Footer({ children: [small([new TextRun({ children: [PageNumber.CURRENT], size: 18, color: "555555" })])] }) },
     children: body,
   }],
