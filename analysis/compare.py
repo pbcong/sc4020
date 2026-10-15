@@ -44,7 +44,7 @@ def param_of(row):
     return 0
 
 
-PARAM_NAME = {"HNSW": "efSearch", "PQ": "M (bytes/vector)", "LSH": "nbits (bits/vector)"}
+PARAM_NAME = {"HNSW": "ef (efSearch)", "PQ": "M (bytes/vector)", "LSH": "b (bits/vector)"}
 PQ_FILE = {"PQ": "pq", "HNSW": "hnsw", "LSH": "lsh"}
 
 
@@ -111,7 +111,7 @@ def legend_handles(methods, with_exact=True):
     from matplotlib.lines import Line2D
     h = [Line2D([], [], color=COLOR[m], marker="o", label=m) for m in methods]
     if with_exact:
-        h.append(Line2D([], [], color=COLOR["Exact"], marker="*", ls="none", ms=10, label="Exact (brute force)"))
+        h.append(Line2D([], [], color=COLOR["Exact"], marker="*", ls="none", ms=10, label="Linear search (exact)"))
     h += [Line2D([], [], color=INK2, ls="-", marker="o", label="image queries"),
           Line2D([], [], color=INK2, ls="--", marker="o", mfc="white", label="text queries")]
     return h
@@ -136,14 +136,24 @@ def fig_tradeoff(df, x, stem, xlabel, label_params=True):
                 ax.plot(g[x], g["recall@100"], marker="o", color=COLOR[m], ls=STYLE[qt]["ls"],
                         mfc=STYLE[qt]["mfc"] or COLOR[m], mec=COLOR[m])
                 if label_params and qt == "image" and (m != "HNSW" or x == "qps"):
-                    for _, r in g.iloc[[0, -1]].iterrows():
-                        ax.annotate(f"{'ef' if m == 'HNSW' else 'M=' if m == 'PQ' else 'b='}{r['param']}",
-                                    (r[x], r["recall@100"]), textcoords="offset points", xytext=(5, -10),
+                    # PQ labels go above-left on the memory plot so they do not sit on the LSH line
+                    off, ha = ((-6, 5), "right") if (m == "PQ" and x == "bytes_per_vector") else ((5, -10), "left")
+                    for i, (_, r) in enumerate(g.iloc[[0, -1]].iterrows()):
+                        if m == "LSH" and x == "bytes_per_vector" and i == 1:
+                            off, ha = (-6, 5), "right"  # clear of the HNSW label
+                        ax.annotate(f"{'ef=' if m == 'HNSW' else 'M=' if m == 'PQ' else 'b='}{r['param']}",
+                                    (r[x], r["recall@100"]), textcoords="offset points", xytext=off, ha=ha,
                                     fontsize=7, color=INK2)
+                if x == "bytes_per_vector" and m == "HNSW" and qt == "text":
+                    ax.annotate("HNSW, ef 100 to 1024\n(same memory)", (g[x].iloc[0], g["recall@100"].min()),
+                                textcoords="offset points", xytext=(0, -8), ha="center", va="top",
+                                fontsize=7, color=COLOR["HNSW"])
         ex = d[(d["method"] == "Exact") & (d["query_type"] == "image")]
         if len(ex):
             ax.plot(ex[x], [1.0] * len(ex), marker="*", ms=12, color=COLOR["Exact"], ls="none")
         ax.set_xscale("log")
+        if x == "bytes_per_vector":
+            ax.set_xlim(right=6000)  # keep the HNSW stack and the star away from the edge
         ax.set_title(TITLES[name], color=INK)
         ax.set_xlabel(xlabel)
         ax.set_ylim(0, 1.03)
@@ -260,7 +270,7 @@ def fig_failure(delta, profiles):
             for qt, ls, mfc in (("image", "-", COLOR[m]), ("text", "--", "white")):
                 bx, by = binned(xs[qt], pq[f"{qt}_recall@100"], edges)
                 ax.plot(bx, by, marker="o", color=COLOR[m], ls=ls, mfc=mfc, mec=COLOR[m], label=f"{qt} queries")
-            ax.set_title(f"{m} ({'efSearch ' if m == 'HNSW' else 'M='}{param}): {TITLES[name]}", color=INK)
+            ax.set_title(f"{m} ({'ef' if m == 'HNSW' else 'M'} = {param}): {TITLES[name]}", color=INK)
             ax.set_xlabel(xlabel)
             ax.set_ylabel("mean recall@100 of queries in bin")
             if i == 0:
@@ -283,10 +293,43 @@ def fig_hnsw_work():
     ax.minorticks_off()
     ax.axhline(0, color=INK2, lw=0.8)
     ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0))
-    ax.set_xlabel("efSearch")
+    ax.set_xlabel("ef (efSearch)")
     ax.set_ylabel("extra distance computations\nfor text vs image queries")
     ax.legend(frameon=False)
     save(fig, "fig6_hnsw_extra_work")
+
+
+# settings shown in Table 4 of the report
+BEST = {"coco": {"HNSW": 128, "PQ": 64, "LSH": 4096}, "laion": {"HNSW": 512, "PQ": 64, "LSH": 4096}}
+
+
+def fig_summary(df, delta):
+    """Speed vs memory at each method's best setting, annotated with image / text recall@100."""
+    fig, axes = plt.subplots(1, 2, figsize=(10, 3.6))
+    for ax, name in zip(axes, DATASETS):
+        for m in METHODS:
+            r = delta[(delta["dataset"] == name) & (delta["method"] == m) & (delta["param"] == BEST[name][m])].iloc[0]
+            setting = f"{'ef' if m == 'HNSW' else 'M' if m == 'PQ' else 'b'} = {BEST[name][m]}"
+            ax.plot(r["bytes_per_vector"], r["qps"], marker="o", ms=9, color=COLOR[m], ls="none")
+            ax.annotate(f"{m} ({setting})\nrecall {r['img@100']:.2f} / {r['txt@100']:.2f}",
+                        (r["bytes_per_vector"], r["qps"]), textcoords="offset points", xytext=(9, -4),
+                        fontsize=7.5, color=INK, va="center")
+        ex = df[(df["dataset"] == name) & (df["method"] == "Exact") & (df["query_type"] == "image")].iloc[0]
+        ax.plot(ex["bytes_per_vector"], ex["qps"], marker="*", ms=13, color=COLOR["Exact"], ls="none")
+        ax.annotate("Linear search\nrecall 1 / 1", (ex["bytes_per_vector"], ex["qps"]), textcoords="offset points",
+                    xytext=(-10, 0), ha="right", fontsize=7.5, color=INK, va="center")
+        ax.set_xscale("log")
+        ax.set_yscale("log")
+        ax.set_xlim(30, 9000)
+        lo, hi = ax.get_ylim()
+        ax.set_ylim(lo / 1.6, hi * 1.6)
+        ax.set_title(TITLES[name], color=INK)
+        ax.set_xlabel("memory, bytes per vector (log scale; left is smaller)")
+        ax.set_ylabel("queries per second (log scale)")
+    fig.text(0.5, -0.03, "Labels: recall@100 for image / text queries. Up and to the left is better.",
+             ha="center", fontsize=8, color=INK2)
+    fig.tight_layout()
+    save(fig, "fig_summary_tradeoff")
 
 
 def md(df, floatfmt="{:.4g}", index=False):
@@ -340,6 +383,7 @@ def main():
     fig_modality_gap(profiles, centre_cos)
     fig_tradeoff(df, "qps", "fig2_recall_vs_qps", "queries per second (1 thread, log scale)")
     fig_tradeoff(df, "bytes_per_vector", "fig3_recall_vs_memory", "index size, bytes per vector (log scale)")
+    fig_summary(df, delta)
     fig_param_gap(delta)
     fig_failure(delta, profiles)
     fig_hnsw_work()

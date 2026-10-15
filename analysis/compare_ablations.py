@@ -18,9 +18,9 @@ FIX = {"HNSW": COLOR["HNSW"], "HNSW+qedges": "#6250d6", "HNSW+entry": "#1baf7a",
        "PQ[qa-mix-opq]": "#1baf7a", "PQ+rerank": "#2a78d6"}
 
 
-PQ_LABEL = {"PQ[pq]": "PQ (baseline)", "PQ[opq]": "OPQ (learned rotation)",
-            "PQ[qa-text-pq]": "text-weighted PQ (no rotation)", "PQ[qa-text-opq]": "text-weighted OPQ",
-            "PQ[qa-mix-opq]": "image+text-weighted OPQ"}
+PQ_LABEL = {"PQ[pq]": "PQ (baseline)", "PQ[opq]": "OPQ",
+            "PQ[qa-text-pq]": "text-weighted PQ", "PQ[qa-text-opq]": "text-weighted OPQ",
+            "PQ[qa-mix-opq]": "mixed OPQ"}
 
 
 def num(s, key):
@@ -81,9 +81,9 @@ def fig_hnsw_params(lines):
         g = w[w[fixed[0]] == fixed[1]]
         for ef, mk in ((100, "o"), (256, "s")):
             h = g[g["ef"] == ef].sort_values(key)
-            ax.plot(h[key], h["recall@100_image"], marker=mk, color=COLOR["HNSW"], label=f"image, efSearch {ef}")
+            ax.plot(h[key], h["recall@100_image"], marker=mk, color=COLOR["HNSW"], label=f"image, ef = {ef}")
             ax.plot(h[key], h["recall@100_text"], marker=mk, color=COLOR["HNSW"], ls="--", mfc="white",
-                    label=f"text, efSearch {ef}")
+                    label=f"text, ef = {ef}")
         if key == "efC":
             r = rep[(rep["query_type"] == "text") & (rep["search_params"] == "efSearch=100")]
             for b, x in (("M=32,efC=200", 200), ("M=32,efC=40", 40)):
@@ -110,8 +110,8 @@ def fig_scaling(lines):
     pq = main_results("laion", "PQ")
     pq = pq[pq["M"].isin([16, 64])].assign(N=999448.0)
     df = pd.concat([df, hn, pq], ignore_index=True)
-    df["setting"] = np.where(df["method"] == "HNSW", "HNSW efSearch " + df["ef"].fillna(0).astype(int).astype(str),
-                             "PQ M=" + df["M"].fillna(0).astype(int).astype(str))
+    df["setting"] = np.where(df["method"] == "HNSW", "HNSW ef = " + df["ef"].fillna(0).astype(int).astype(str),
+                             "PQ M = " + df["M"].fillna(0).astype(int).astype(str))
     w = wide(df, ["setting", "N"]).sort_values(["setting", "N"])
     lines.append("## Scaling (LAION random subsets, exact top-100 recomputed per subset)\n\n" + md(w[[
         "setting", "N", "recall@100_image", "recall@100_text", "delta", "qps_image"]], "{:.4g}") + "\n")
@@ -123,7 +123,7 @@ def fig_scaling(lines):
             ax.plot(g["N"], g["recall@100_text"], marker="o", color=COLOR[meth], ls=ls, mfc="white",
                     label=f"{setting}, text", alpha=0.7)
         ax.set_xscale("log")
-        ax.set_xlabel("corpus size N (LAION subsets, log scale)")
+        ax.set_xlabel("database size (LAION subsets, log scale)")
         ax.set_ylabel("recall@100")
         ax.set_title(meth, color=INK)
         ax.legend(frameon=False, fontsize=7)
@@ -233,7 +233,7 @@ def fig_pq_fixes(lines):
 LSH_VARIANTS = {"LSH": ("plain (random hyperplanes)", COLOR["LSH"], "o", 5),
                 "LSH-thr": ("median thresholds", "#eda100", "s", 11),
                 "LSH-center": ("image-mean centring", "#e87ba4", "^", 8.5),
-                "LSH-center-QA": ("modality-aware centring (caption-aware)", "#6250d6", "o", 4)}
+                "LSH-center-QA": ("modality-aware centring", "#6250d6", "o", 4)}
 
 
 # ------------------------------------------------------------------ Fig 11: LSH variants
@@ -262,7 +262,7 @@ def fig_lsh_variants(lines):
         ax.minorticks_off()
         ax.set_title(f"{TITLES[name]}: text queries", color=INK)
         ax.set_ylabel("recall@100")
-        ax.set_xlabel("nbits (bits per vector)")
+        ax.set_xlabel("b (bits per vector)")
     axes[0].legend(frameon=False, fontsize=7)
     fig.tight_layout()
     save(fig, "fig11_lsh_variants")
