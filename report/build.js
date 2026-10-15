@@ -16,12 +16,13 @@ const R = String.raw;
 // ---------- inline markup: $math$, **bold**, *italic*
 function runs(text, base = {}) {
   const out = [];
-  const re = /(\$[^$]+\$|\*\*[^*]+\*\*|\*[^*]+\*)/g;
+  const re = /(\$[^$]+\$|\*\*__[^_]+__\*\*|__[^_]+__|\*\*[^*]+\*\*|\*[^*]+\*)/g;
   let last = 0, m;
   while ((m = re.exec(text))) {
     if (m.index > last) out.push(new TextRun({ text: text.slice(last, m.index), ...base }));
     const t = m[0];
     if (t.startsWith("$")) out.push(math(t.slice(1, -1)));
+    else if (t.startsWith("__")) out.push(new TextRun({ text: t.slice(2, -2), underline: {}, ...base }));
     else if (t.startsWith("**")) out.push(new TextRun({ text: t.slice(2, -2), bold: true, ...base }));
     else out.push(new TextRun({ text: t.slice(1, -1), italics: true, ...base }));
     last = m.index + t.length;
@@ -229,7 +230,7 @@ add(
   P(R`CLIP image vectors lie in a narrow cone around $μ_{I}$. For a random hyperplane, $w^{⊤}x=w^{⊤}μ_{I}+w^{⊤}(x−μ_{I})$, and when $\abs{w^{⊤}μ_{I}}$ is larger than the spread of the second term, every image lands on the same side and the bit is useless. There are two common data-dependent fixes that move the hyperplanes into the cone. One subtracts the image mean, $h_{i}(x)=1[w_{i}^{⊤}(x−μ_{I})>0]$, and the other thresholds each projection at its median over the database. Both make every bit split the images roughly in half.`),
   P(R`For a text query, though, $w^{⊤}(q−μ_{I})$ is dominated by the constant $w^{⊤}(μ_{T}−μ_{I})$. After centring on the image mean, a text query lands on the same side of most hyperplanes whatever its content. We therefore centre each modality on its own mean:`),
   EQ(R`h_{i}(x)=1\b{w_{i}^{⊤}(x−μ_{I})>0} (database), h_{i}(q)=1\b{w_{i}^{⊤}(q−μ_{T})>0} (text queries)`, "lshqa"),
-  P(R`where $μ_{T}$ is estimated from the training captions. This lines up the centres of the two cones before hashing. The database codes are the same as for image-centred LSH, so there is no extra build cost.`),
+  P(R`where $μ_{T}$ is estimated from the training captions. This lines up the centres of the two cones before hashing. The change targets text queries only: the database and image queries are hashed exactly as in image-mean centring, so image-query results are unchanged by construction and there is no extra build cost.`),
 
   H2("3.7", "Query-weighted product quantization"),
   P(R`Eq. (${EN.scoreerr}) shows that the error that matters for a given query distribution is the reconstruction error weighted by $S$. Let $A=S^{1/2}$ be the symmetric square root of the query second-moment matrix. If we index $x'=Ax$ and search with $q'=A^{−1}q$, every inner product stays exactly the same:`),
@@ -373,14 +374,14 @@ add(H1("4", "Experiments"),
   H2("4.7", "Results of the improved methods"),
   P("Everything in this section is measured against the original exact top-100, so the numbers can be compared directly with Sections 4.3 to 4.5."),
   H3("HNSW with caption-guided edges"),
-  ...table(10, "HNSW variants at $ef$ = 100 (recall@100). Variants 1 and 2 are the ablations described in Section 3.8.",
+  ...table(10, "HNSW variants at $ef$ = 100 (recall@100). Variants 1 and 2 are the ablations described in Section 3.8. Bold: best recall per dataset; underlined: second best (COCO only, since LAION has two rows).",
     ["Dataset", "Variant", "Image", "Text", "Δ", "Extra memory"],
-    [["COCO", "Baseline", "0.986", "0.884", "0.101", "-"],
-     ["COCO", "1. Caption entry points", "0.986", "0.877", "0.108", "+2,328 B/vector"],
-     ["COCO", "2. Captions as graph nodes", "0.985", "**0.078**", "0.907", "+232 B/vector"],
-     ["COCO", "3. Caption-guided edges (Alg. 1)", "**0.987**", "**0.947**", "**0.040**", "none"],
+    [["COCO", "Baseline", "__0.986__", "__0.884__", "0.101", "-"],
+     ["COCO", "1. Caption entry points", "__0.986__", "0.877", "0.108", "+2,328 B/vector"],
+     ["COCO", "2. Captions as graph nodes", "0.985", "0.078", "0.907", "+232 B/vector"],
+     ["COCO", "3. Caption-guided edges (Alg. 1)", "**0.987**", "**0.947**", "0.040", "none"],
      ["LAION", "Baseline", "0.939", "0.749", "0.190", "-"],
-     ["LAION", "3. Caption-guided edges (Alg. 1)", "**0.950**", "**0.818**", "**0.132**", "none"]],
+     ["LAION", "3. Caption-guided edges (Alg. 1)", "**0.950**", "**0.818**", "0.132", "none"]],
     [1.1, 3.2, 1, 1, 1, 1.7]),
   ...figure("fig9_hnsw_fixes.png", 1741, 879, 9, "HNSW variants: recall@100 against QPS (dashed: text queries). Purple: caption-guided edges (lighter shades use fewer training captions); green: caption entry points."),
   P("Table 10 and Figure 9 compare the three caption-based changes."),
@@ -391,13 +392,13 @@ add(H1("4", "Experiments"),
 
   H3("Query-weighted PQ"),
   P("Table 11 combines the two parts of Section 3.7, query weighting and the OPQ rotation, and also includes the mixed weighting. The last two columns give the error-to-contrast ratio $ρ$ from Eq. (" + EN.rho + ") at $M$ = 64, computed from the RMS score error over each query's true top-100."),
-  ...table(11, "PQ variants at $M$ = 64 bytes per vector: recall@100 (image / text, Δ) and error-to-contrast ratio $ρ$ (image / text).",
+  ...table(11, "PQ variants at $M$ = 64 bytes per vector: recall@100 (image / text, Δ) and error-to-contrast ratio $ρ$ (image / text). Bold: best in each column for each query type (highest recall, lowest $ρ$); underlined: second best.",
     ["Variant", "Weights", "OPQ", "COCO recall", "LAION recall", "COCO $ρ$", "LAION $ρ$"],
     [["PQ (baseline)", "none", "no", "0.656 / 0.512 (Δ 0.143)", "0.561 / 0.437 (Δ 0.124)", "0.57 / 0.78", "0.72 / 0.82"],
-     ["OPQ", "none", "yes", "0.773 / 0.665 (Δ 0.108)", "0.662 / 0.537 (Δ 0.124)", "0.26 / 0.36", "0.47 / 0.56"],
+     ["OPQ", "none", "yes", "__0.773__ / 0.665 (Δ 0.108)", "__0.662__ / __0.537__ (Δ 0.124)", "**0.26** / 0.36", "**0.47** / __0.56__"],
      ["Text-weighted PQ", "captions", "no", "0.160 / 0.461", "0.124 / 0.392", "0.99 / 0.82", "0.95 / 0.90"],
-     ["**Text-weighted OPQ**", "captions", "yes", "0.632 / **0.793** (Δ −0.161)", "0.554 / **0.579** (Δ −0.025)", "0.43 / **0.21**", "0.65 / **0.53**"],
-     ["**Mixed OPQ**", "50/50", "yes", "**0.809** / 0.732 (Δ 0.077)", "**0.691** / 0.519 (Δ 0.171)", "0.26 / 0.26", "0.50 / 0.60"]],
+     ["Text-weighted OPQ", "captions", "yes", "0.632 / **0.793** (Δ −0.161)", "0.554 / **0.579** (Δ −0.025)", "__0.43__ / **0.21**", "0.65 / **0.53**"],
+     ["Mixed OPQ", "50/50", "yes", "**0.809** / __0.732__ (Δ 0.077)", "**0.691** / 0.519 (Δ 0.171)", "**0.26** / __0.26__", "__0.50__ / 0.60"]],
     [1.6, 1.0, 0.75, 2.35, 2.35, 1.1, 1.1]),
   ...figure("fig10_pq_fixes.png", 1983, 1302, 10, "PQ variants: recall@100 against code size, for image queries (top) and text queries (bottom)."),
   B("**The rotation is necessary.** Weighting on its own puts most of the variance into a few directions, which a fixed split into sub-vectors handles badly. Image recall drops to 0.12 to 0.16 and $ρ$ gets close to 1."),
@@ -407,9 +408,9 @@ add(H1("4", "Experiments"),
   P("**Re-ranking.** Another common option is to re-score PQ's top candidates with the full vectors. Re-ranking the top 1,000 (at most 21% slower) raises recall at $M$ = 64 to 0.998 / 0.974 on COCO and 0.968 / 0.895 on LAION. However, this needs the full vectors in RAM or on SSD, which removes PQ's memory advantage, and it cannot recover neighbours that never made it into the candidate list. With short codes the gap even grows as the list gets longer (LAION, $M$ = 16: Δ goes from 0.12 to 0.20 between 200 and 1,000 candidates). The two approaches work well together: better codes put more true neighbours into the list, and re-ranking then puts them in the right order."),
 
   H3("Modality-aware LSH"),
-  ...figure("fig11_lsh_variants.png", 1983, 1302, 11, "LSH variants: recall@100 against code length. Top: image queries (the three data-dependent variants overlap). Bottom: text queries."),
-  P("Figure 11 compares plain LSH with the three variants from Section 3.6."),
-  B("**Image queries:** balanced bits help when there are few bits (COCO, 128 bits: 0.27 to 0.35), although plain LSH is slightly better at 4,096 bits."),
+  ...figure("fig11_lsh_variants.png", 1983, 682, 11, "LSH variants: text-query recall@100 against code length. Median thresholds and image-mean centring overlap."),
+  P("Modality-aware centring is meant to improve text queries, not image queries, so Figure 11 compares plain LSH with the three variants from Section 3.6 on text queries only."),
+  B("**Image queries (not plotted):** modality-aware centring does not change how image queries are hashed, so their recall is exactly that of image-mean centring. The three data-dependent variants give practically the same image recall, which is better than plain LSH with few bits (COCO, 128 bits: 0.27 to 0.35) and slightly worse at 4,096 bits (0.77 against 0.84)."),
   B(R`**Text queries with image-based adjustments:** median thresholds and image-mean centring make text recall much worse. At 4,096 bits it drops to 0.22 on COCO and 0.07 on LAION, from 0.56 and 0.52. Every hyperplane now passes through the image cone, so a text query, which lies outside it, ends up on the same side of most hyperplanes and its code hardly changes from query to query, as expected from Section 3.6.`),
   B("**Modality-aware centring (Eq. " + EN.lshqa + ")** fixes this and does better than plain LSH. Text recall roughly doubles at medium code lengths (COCO, 512 bits: 0.18 to 0.33; LAION, 1,024 bits: 0.23 to 0.40), and the LAION gap at 4,096 bits falls from 0.29 to 0.12."),
 

@@ -229,9 +229,11 @@ def fig_pq_fixes(lines):
     save(fig, "fig10_pq_fixes")
 
 
-LSH_VARIANTS = {"LSH": ("plain (random hyperplanes)", COLOR["LSH"]), "LSH-thr": ("median thresholds", "#eda100"),
-                "LSH-center": ("image-mean centring", "#e87ba4"),
-                "LSH-center-QA": ("modality-aware centring (caption-aware)", "#6250d6")}
+# distinct markers, largest drawn first: median thresholds and image-mean centring coincide
+LSH_VARIANTS = {"LSH": ("plain (random hyperplanes)", COLOR["LSH"], "o", 5),
+                "LSH-thr": ("median thresholds", "#eda100", "s", 11),
+                "LSH-center": ("image-mean centring", "#e87ba4", "^", 8.5),
+                "LSH-center-QA": ("modality-aware centring (caption-aware)", "#6250d6", "o", 4)}
 
 
 # ------------------------------------------------------------------ Fig 11: LSH variants
@@ -241,28 +243,27 @@ def fig_lsh_variants(lines):
     df = df[df["method"].isin(LSH_VARIANTS)]
     if df.empty:
         return
-    fig, axes = plt.subplots(2, 2, figsize=(10, 6.6), sharex=True)
+    # text queries only: for image queries centre-QA is identical to centre by construction
+    fig, axes = plt.subplots(1, 2, figsize=(10, 3.5))
     for j, name in enumerate(DATASETS):
         d = df[df["dataset"] == name]
         w = wide(d.rename(columns={"param": "nbits"}), ["method", "nbits"])
         lines.append(f"## {name} LSH variants (mean over 3 projection seeds)\n\n" + md(
             w[["method", "nbits", "recall@100_image", "recall@100_text", "delta", "qps_image",
                "bytes_per_vector_image"]], "{:.4g}") + "\n")
-        for i, qt in enumerate(("image", "text")):
-            ax = axes[i, j]
-            for meth, (label, color) in LSH_VARIANTS.items():
-                g = d[(d["method"] == meth) & (d["query_type"] == qt)].sort_values("param")
-                ax.plot(g["param"], g["recall@100"], marker="o", color=color, ls="--" if qt == "text" else "-",
-                        mfc="white" if qt == "text" else color, mec=color, label=label)
-            ax.set_xscale("log", base=2)
-            ticks = sorted(d["param"].unique())
-            ax.set_xticks(ticks, [str(int(t)) for t in ticks], fontsize=7)
-            ax.minorticks_off()
-            ax.set_title(f"{TITLES[name]}: {qt} queries", color=INK)
-            ax.set_ylabel("recall@100")
-            if i == 1:
-                ax.set_xlabel("nbits (bits per vector)")
-    axes[0, 0].legend(frameon=False, fontsize=7)
+        ax = axes[j]
+        for meth, (label, color, mk, ms) in LSH_VARIANTS.items():
+            g = d[(d["method"] == meth) & (d["query_type"] == "text")].sort_values("param")
+            ax.plot(g["param"], g["recall@100"], marker=mk, ms=ms, color=color, lw=1.4, mfc="white", mec=color,
+                    label=label)
+        ax.set_xscale("log", base=2)
+        ticks = sorted(d["param"].unique())
+        ax.set_xticks(ticks, [str(int(t)) for t in ticks], fontsize=7)
+        ax.minorticks_off()
+        ax.set_title(f"{TITLES[name]}: text queries", color=INK)
+        ax.set_ylabel("recall@100")
+        ax.set_xlabel("nbits (bits per vector)")
+    axes[0].legend(frameon=False, fontsize=7)
     fig.tight_layout()
     save(fig, "fig11_lsh_variants")
 
