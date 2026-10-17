@@ -125,7 +125,7 @@ add(
     children: [new TextRun({ text: "Topic: Similarity Search (LSH, PQ and HNSW for Text-to-Image Search)", bold: true, size: 28 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 },
     children: [new TextRun({ text: "Group 21", bold: true, size: 22 })] }),
-  ...[["Pham Ba Cong", "U2331760J"], ["Phan The Manh", "[matric no.]"], ["Chu Gia Han", "[matric no.]"], ["Pham Gia Phuc", "[matric no.]"]]
+  ...[["Pham Ba Cong", "U2331760J"], ["Phan The Manh", "[U2420720F]"], ["Chu Gia Han", "[U2430050C]"], ["Pham Gia Phuc", "[U2420583F]"]]
     .map(([name, id]) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 20 },
       children: [new TextRun({ text: `${name} (${id})`, size: 22 })] })),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 320 },
